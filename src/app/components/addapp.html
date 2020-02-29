@@ -1,0 +1,52 @@
+<button *ngIf="!app.editing" mat-icon-button (click)="edit()">
+    <mat-icon>add</mat-icon>
+</button>
+
+<mat-card *ngIf="app.editing" style="width: 100%;">
+    <form style="margin-bottom: 1em;">
+        <div fxLayout="column">
+            <mat-form-field style="flex: 1 1 auto;">
+                <span matPrefix>https://</span>
+                <input #name name="url" type="text" matInput [(ngModel)]="url">
+            </mat-form-field>
+            <div fxLayout="row" fxLayoutGap="1em">
+                <button mat-raised-button color="primary" (click)="add()" [disabled]="!url">Add</button>
+                <div style="flex: 1 1 auto;"></div>
+                <button mat-raised-button (click)="cancel()">Done</button>
+            </div>
+        </div>
+    </form>
+
+    <mat-divider></mat-divider>
+
+    <div style="margin-top: 2em;">
+        <table style="width: 100%;" mat-table [dataSource]="app.apps" class="mat-elevation-z1">
+
+        <!-- Icon -->
+        <ng-container matColumnDef="Icon">
+            <td mat-cell *matCellDef="let element"> <img width="32" height="32" [src]="element.icon"/> </td>
+        </ng-container>
+
+        <!-- Name -->
+        <ng-container matColumnDef="Name">
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- URL -->
+        <ng-container matColumnDef="URL">
+            <td mat-cell *matCellDef="let element"> {{element.url}} </td>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="Actions">
+            <td mat-cell *matCellDef="let element; let i = index" style="text-align: right;">
+                <button mat-icon-button (click)="delete(i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</mat-card>
