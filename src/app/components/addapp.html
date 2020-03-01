@@ -3,6 +3,9 @@
 </button>
 
 <mat-card *ngIf="app.editing" style="width: 100%;">
+    <mat-card-title>Launcher Setup</mat-card-title>
+    <mat-card-subtitle>Add your favorite Web Apps</mat-card-subtitle>
+
     <form style="margin-bottom: 1em;">
         <div fxLayout="column">
             <mat-form-field style="flex: 1 1 auto;">
@@ -34,7 +37,7 @@
 
         <!-- URL -->
         <ng-container matColumnDef="URL">
-            <td mat-cell *matCellDef="let element"> {{element.url}} </td>
+            <td fxHide.xs mat-cell *matCellDef="let element"> {{element.url}} </td>
         </ng-container>
 
         <!-- Actions -->
