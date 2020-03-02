@@ -18,7 +18,9 @@ export class AddAppComponent {
         public app: AppService,
         private appsApi: AppsApi,
         private snackBar: MatSnackBar
-    ) {}
+    ) {
+        this.app.editingComponent = this;
+    }
 
     edit() {
         this.app.editing = true;

@@ -1,10 +1,5 @@
-<button *ngIf="!app.editing" mat-icon-button (click)="edit()">
-    <mat-icon>add</mat-icon>
-</button>
-
 <mat-card *ngIf="app.editing" style="width: 100%;">
-    <mat-card-title>Launcher Setup</mat-card-title>
-    <mat-card-subtitle>Add your favorite Web Apps</mat-card-subtitle>
+    Add your favorite web sites:
 
     <form style="margin-bottom: 1em;">
         <div fxLayout="column">

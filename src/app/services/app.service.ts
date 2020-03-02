@@ -1,10 +1,12 @@
 import { Injectable } from "@angular/core";
+import { AddAppComponent } from '../components/addapp';
 
 @Injectable()
 export class AppService {
 
     editing: boolean = false;
     apps: Array<any> = [];
+    editingComponent: AddAppComponent;
 
     constructor() {
         this.load();
@@ -28,5 +30,9 @@ export class AppService {
     removeApp(i: number) {
         this.apps.splice(i,1);
         this.save();
+    }
+
+    startEditing() {
+        if (this.editingComponent) this.editingComponent.edit();
     }
 }
