@@ -2,11 +2,14 @@
     Add your favorite web sites:
 
     <form style="margin-bottom: 1em;">
-        <div fxLayout="column">
-            <mat-form-field style="flex: 1 1 auto;">
-                <span matPrefix>https://</span>
-                <input #name name="url" type="text" matInput [(ngModel)]="url">
-            </mat-form-field>
+        <div fxLayout="column" fxLayoutGap="1em">
+            <div fxLayout="column">
+                <mat-form-field style="flex: 1 1 auto;">
+                    <span matPrefix>https://</span>
+                    <input #name name="url" type="text" matInput [(ngModel)]="url">
+                </mat-form-field>
+                <mat-checkbox name="sensitive" [(ngModel)]="sensitive">Sensitive URL (do not resolve icon and name)</mat-checkbox>
+            </div>
             <div fxLayout="row" fxLayoutGap="1em">
                 <button mat-raised-button color="primary" (click)="add()" [disabled]="!url">Add</button>
                 <div style="flex: 1 1 auto;"></div>

@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AppComponent } from './app.component';
 import { PwaLauncherComponent } from './components/pwa-launcher';
@@ -43,7 +44,8 @@ import { AppService } from './services/app.service';
     MatFormFieldModule,
     MatSnackBarModule,
     MatDividerModule,
-    MatTableModule
+    MatTableModule,
+    MatCheckboxModule
   ],
   providers: [
     AppService,

@@ -13,6 +13,7 @@ export class AddAppComponent {
     displayedColumns: string[] = ['Icon', 'Name', 'URL', 'Actions'];
 
     url: string;
+    sensitive: boolean;
 
     constructor(
         public app: AppService,
@@ -36,9 +37,19 @@ export class AddAppComponent {
             let url = 'https://' + this.url;
             this.url = "";
             console.log("Adding: " + url);
-            this.app.addApp(await this.appsApi.getAppInfo(url));
+            let appInfo;
+            if (this.sensitive) {
+                appInfo = {
+                    url: url,
+                    name: url,
+                    icon: '/assets/lock.png'
+                }
+            } else {
+                appInfo = await this.appsApi.getAppInfo(url);
+            }
+            this.app.addApp(appInfo);
         } catch (err) {
-            this.snackBar.open("Error", err, { duration: 7000 });
+            this.snackBar.open("Error", err, { duration: 10000 });
         }
     }
 

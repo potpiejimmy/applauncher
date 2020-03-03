@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: "https://api.applauncher.site/"
- //  apiUrl: "http://localhost:3000/"
+//  apiUrl: "https://api.applauncher.site/"
+   apiUrl: "http://localhost:3000/"
 };
 
 /*
