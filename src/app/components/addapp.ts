@@ -2,6 +2,8 @@ import { Component, ViewChild } from "@angular/core";
 import { AppService } from '../services/app.service';
 import { AppsApi } from '../services/appsapi';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { MatTable } from '@angular/material/table';
 
 @Component({
     selector: "add-app",
@@ -10,7 +12,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AddAppComponent {
     
     @ViewChild('name') inpname;
-    displayedColumns: string[] = ['Icon', 'Name', 'URL', 'Actions'];
+    @ViewChild('appTable') table: MatTable<any>;
+    displayedColumns: string[] = ['Reorder', 'Icon', 'Name', 'URL', 'Actions'];
 
     url: string;
     sensitive: boolean;
@@ -55,5 +58,11 @@ export class AddAppComponent {
 
     async delete(row: number) {
         this.app.removeApp(row);
+    }
+
+    dropTable(event: CdkDragDrop<any>) {
+        const prevIndex = this.app.apps.findIndex(d => d.url === event.item.data.url);
+        moveItemInArray(this.app.apps, prevIndex, event.currentIndex);
+        this.table.renderRows();
     }
 }

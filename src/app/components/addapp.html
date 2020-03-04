@@ -21,7 +21,17 @@
     <mat-divider></mat-divider>
 
     <div style="margin-top: 2em;">
-        <table style="width: 100%;" mat-table [dataSource]="app.apps" class="mat-elevation-z1">
+        <table #appTable style="width: 100%;" mat-table [dataSource]="app.apps" class="mat-elevation-z1"
+            cdkDropList
+            [cdkDropListData]="app.apps"
+            (cdkDropListDropped)="dropTable($event)">
+
+        <!-- Reorder -->
+        <ng-container matColumnDef="Reorder">
+            <td mat-cell *matCellDef="let element">
+                <mat-icon cdkDragHandle>reorder</mat-icon>
+            </td>
+        </ng-container>
 
         <!-- Icon -->
         <ng-container matColumnDef="Icon">
@@ -47,7 +57,7 @@
             </td>
         </ng-container>
 
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag [cdkDragData]="row"></tr>
         </table>
     </div>
 </mat-card>

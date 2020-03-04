@@ -4,6 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule }   from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 // Material
 import { MatCardModule } from '@angular/material/card';
@@ -35,6 +36,7 @@ import { AppService } from './services/app.service';
     FlexLayoutModule,
     HttpClientModule,
     FormsModule,
+    DragDropModule,
     // Material
     MatCardModule,
     MatToolbarModule,
