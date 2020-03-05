@@ -1,23 +1,28 @@
+<div id="mainBodyDiv" [ngClass]="app.modeClass">
 
-<!-- Toolbar -->
-<mat-toolbar id="titlebar">
-  <!--img
-    width="40"
-    alt="Angular Logo"
-    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
-  /-->
-  <button [disabled]="app.editing" mat-icon-button (click)="app.startEditing()">
-      <mat-icon>edit</mat-icon>
-  </button>
-  <div style="flex: 1 1 auto;">App Launcher</div>
-  <button mat-icon-button (click)="fullscreen()">
-      <mat-icon>fullscreen</mat-icon>
-  </button>
-</mat-toolbar>
+  <!-- Toolbar -->
+  <mat-toolbar id="titlebar" class="modeDark">
+    <!--img
+      width="40"
+      alt="Angular Logo"
+      src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+    /-->
+    <button [disabled]="app.editing" mat-icon-button (click)="app.startEditing()">
+        <mat-icon>edit</mat-icon>
+    </button>
+    <div style="flex: 1 1 auto;">App Launcher</div>
+    <button mat-icon-button (click)="app.toggleMode()">
+        <mat-icon>{{modeToggleIcon}}</mat-icon>
+    </button>
+    <button mat-icon-button (click)="fullscreen()">
+        <mat-icon>fullscreen</mat-icon>
+    </button>
+  </mat-toolbar>
 
-<div fxLayout="column" class="screenCenter">
-  <div *ngIf="!app.editing" fxLayout="row wrap" fxLayoutAlign="center" style="margin: .5em;">
-    <pwa-launcher *ngFor="let app of app.apps" [app]="app"></pwa-launcher>
+  <div fxLayout="column" class="screenCenter">
+    <div *ngIf="!app.editing" fxLayout="row wrap" fxLayoutAlign="center" style="margin: .5em;">
+      <pwa-launcher *ngFor="let app of app.apps" [app]="app"></pwa-launcher>
+    </div>
+    <add-app fxLayoutAlign="center" style="width: 75%;"></add-app>
   </div>
-  <add-app fxLayoutAlign="center" style="width: 75%;"></add-app>
 </div>

@@ -5,7 +5,6 @@
         <div fxLayout="column" fxLayoutGap="1em">
             <div fxLayout="column">
                 <mat-form-field style="flex: 1 1 auto;">
-                    <span matPrefix>https://</span>
                     <input #name name="url" type="text" matInput [(ngModel)]="url">
                 </mat-form-field>
                 <mat-checkbox name="sensitive" [(ngModel)]="sensitive">Sensitive URL (do not resolve icon and name)</mat-checkbox>
@@ -35,7 +34,7 @@
 
         <!-- Icon -->
         <ng-container matColumnDef="Icon">
-            <td mat-cell *matCellDef="let element"> <img width="32" height="32" [src]="element.icon"/> </td>
+            <td mat-cell *matCellDef="let element"> <img width="32" height="32" [src]="element.icon" onerror="this.src='/assets/www.png'"/> </td>
         </ng-container>
 
         <!-- Name -->

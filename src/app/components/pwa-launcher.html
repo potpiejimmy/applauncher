@@ -1,6 +1,6 @@
 <a [href]="app.url">
-    <mat-card style="width: 160px; text-align: center; margin: .5em;">
-        <img width="48" height="48" [src]="app.icon"/>
+    <mat-card [ngClass]="application.modeClass" style="width: 160px; text-align: center; margin: .5em;">
+        <img width="48" height="48" [src]="app.icon" onerror="this.src='/assets/www.png'"/>
         <div style="margin-top: .75em; white-space:nowrap; overflow: hidden;">{{app.name}}</div>
     </mat-card>
 </a>

@@ -7,6 +7,7 @@ export class AppService {
     editing: boolean = false;
     apps: Array<any> = [];
     editingComponent: AddAppComponent;
+    mode: string = 'Light';
 
     constructor() {
         this.load();
@@ -15,11 +16,14 @@ export class AppService {
     load() {
         let storedApps = localStorage.getItem("apps");
         if (storedApps) this.apps = JSON.parse(storedApps);
+        let mode = localStorage.getItem("mode");
+        if (mode) this.mode = mode;
     }
 
     save() {
         this.apps = JSON.parse(JSON.stringify(this.apps)); // change detection Angular
         localStorage.setItem("apps", JSON.stringify(this.apps));
+        localStorage.setItem("mode", this.mode);
     }
 
     addApp(app: any) {
@@ -34,5 +38,14 @@ export class AppService {
 
     startEditing() {
         if (this.editingComponent) this.editingComponent.edit();
+    }
+
+    get modeClass(): string {
+        return 'mode' + this.mode;
+    }
+
+    toggleMode(): void {
+        this.mode = this.mode == 'Light' ? 'Dark' : 'Light';
+        this.save();
     }
 }

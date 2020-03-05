@@ -7,8 +7,6 @@ html, body {
 body { 
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-image: url('/assets/bg.jpg');
-    background-size: cover;
 }
 
 a {
@@ -25,4 +23,21 @@ div.screenCenter {
 
 .mat-snack-bar-container {
     max-width: 100% !important;
+}
+
+.modeDark {
+    background-color: #888;
+    color: white;
+}
+
+.modeLight {
+    background-color: white;
+}
+
+#mainBodyDiv.modeDark {
+    background-color: #111;
+}
+
+#mainBodyDiv.modeLight {
+    background-color: #eee;
 }

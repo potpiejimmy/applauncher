@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AppService } from '../services/app.service';
 //import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -12,7 +13,7 @@ export class PwaLauncherComponent implements OnInit {
     app: any;
 
     constructor(
-//      protected http: HttpClient
+        public application: AppService
     ) { }
 
     ngOnInit(): void {

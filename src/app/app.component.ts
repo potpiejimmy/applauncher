@@ -20,4 +20,8 @@ export class AppComponent implements OnInit {
     fullscreen() {
         window.location.href='https://youtube.com/redirect?q=applauncher.site';
     }
+
+    get modeToggleIcon(): string {
+        return this.app.mode == 'Light' ? 'nights_stay' : 'wb_sunny';
+    }
 }

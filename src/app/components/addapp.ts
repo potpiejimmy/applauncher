@@ -15,7 +15,7 @@ export class AddAppComponent {
     @ViewChild('appTable') table: MatTable<any>;
     displayedColumns: string[] = ['Reorder', 'Icon', 'Name', 'URL', 'Actions'];
 
-    url: string;
+    url: string = "https://";
     sensitive: boolean;
 
     constructor(
@@ -37,8 +37,8 @@ export class AddAppComponent {
 
     async add() {
         try {
-            let url = 'https://' + this.url;
-            this.url = "";
+            let url = this.url;
+            this.url = "https://";
             console.log("Adding: " + url);
             let appInfo;
             if (this.sensitive) {
