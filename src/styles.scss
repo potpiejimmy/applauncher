@@ -26,7 +26,7 @@ div.screenCenter {
 }
 
 .modeDark {
-    background-color: #888;
+    background-color: #444;
     color: white;
 }
 
@@ -40,4 +40,8 @@ div.screenCenter {
 
 #mainBodyDiv.modeLight {
     background-color: #eee;
+}
+
+#titlebar.modeLight {
+    background-color: #888;
 }

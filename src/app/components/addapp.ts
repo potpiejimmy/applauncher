@@ -4,6 +4,8 @@ import { AppsApi } from '../services/appsapi';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatTable } from '@angular/material/table';
+import { Subject, Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
     selector: "add-app",
@@ -15,8 +17,61 @@ export class AddAppComponent {
     @ViewChild('appTable') table: MatTable<any>;
     displayedColumns: string[] = ['Reorder', 'Icon', 'Name', 'URL', 'Actions'];
 
-    url: string = "https://";
+    _url: string = "https://";
     sensitive: boolean;
+    filterChange: Subject<any>;
+    filteredSuggestions: Observable<any>;
+
+    suggestions = [{
+            name: "A Better Routeplanner",
+            icon: "https://abetterrouteplanner.com/icon/abrp_icon.png",
+            url: "https://new.abetterrouteplanner.com"
+        },{
+            name: "Chargeprice",
+            icon: "https://chargeprice.app/img/logos/android-chrome-192x192.png",
+            url: "https://chargeprice.app"
+        },{
+            name: "Google Maps",
+            icon: "https://maps.gstatic.com/mapfiles/maps_lite/pwa/icons/maps15_bnuw3a_round_192x192.png",
+            url: "https://maps.google.com"
+        },{
+            name: "lunch.community",
+            icon: "https://lunch.community/assets/icons/icon-72x72.png",
+            url: "https://lunch.community"
+        },{
+            name: "PlugShare",
+            icon: "https://plugshare.com/favicon.ico",
+            url: "https://plugshare.com"
+        },{
+            name: "Tesla",
+            icon: "https://tesla.com/themes/custom/tesla_frontend/assets/favicons/apple-touch-icon-57x57.png",
+            url: "https://tesla.com"
+        },{
+            name: "TeslaFi.com",
+            icon: "https://teslafi.com/favicon.png",
+            url: "https://teslafi.com"
+        },{
+            name: "TeslaFi.com Firmware Tracker",
+            icon: "/assets/www.png",
+            url: "https://teslafi.com/firmware"
+        },{
+            name: "Tripadvisor",
+            icon: "https://static.tacdn.com/favicon.ico?v2",
+            url: "https://tripadvisor.com"
+        },{
+            name: "Yelp",
+            icon: "https://s3-media0.fl.yelpcdn.com/assets/public/favicon.yelp_styleguide.yji-118ff475a341620f50dfbaddb83efb25.ico",
+            url: "https://yelp.com"
+        },{
+            name: "YouTube",
+            icon: "https://www.gstatic.com/youtube/img/branding/favicon/favicon_48x48.png",
+            url: "https://m.youtube.com"
+        },{
+            name: "Zattoo",
+            icon: "https://zattoo.com/projects/common/src/aura/image/favicon/192x192.png",
+            url: "https://zattoo.com"
+        }
+    ];
 
     constructor(
         public app: AppService,
@@ -24,6 +79,25 @@ export class AddAppComponent {
         private snackBar: MatSnackBar
     ) {
         this.app.editingComponent = this;
+        this.filterChange = new Subject();
+        this.filteredSuggestions = this.filterChange.pipe(
+            startWith(''),
+            map(urlpart => urlpart ? this._filteredSuggestions(urlpart) : [])
+          );
+    }
+    
+    private _filteredSuggestions(value: string): any {
+        const filterValue = value.toLowerCase();
+        return this.suggestions.filter(app => app.url.toLowerCase().indexOf(filterValue) >= 0);
+    }
+
+    get url() {
+        return this._url;
+    }
+
+    set url(url: string) {
+        this._url = url;
+        this.filterChange.next(url.indexOf('://') > 0 ? url.substr(url.indexOf('://') + 3) : url);
     }
 
     edit() {
