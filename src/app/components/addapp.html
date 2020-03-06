@@ -1,4 +1,5 @@
-<mat-card *ngIf="app.editing" style="width: 100%;" [ngClass]="app.modeClass">
+<div fxLayoutAlign="center">
+<mat-card *ngIf="app.editing" style="width: 75%; margin-top: 1em;" [ngClass]="app.modeClass">
     Add your favorite web sites:
 
     <form style="margin-bottom: 1em;">
@@ -18,7 +19,7 @@
             <div fxLayout="row" fxLayoutGap="1em">
                 <button mat-raised-button color="primary" (click)="add()" [disabled]="!url || url.length < 9">Add</button>
                 <div style="flex: 1 1 auto;"></div>
-                <button mat-raised-button (click)="cancel()">Done</button>
+                <button mat-raised-button (click)="save()">Save</button>
             </div>
         </div>
     </form>
@@ -45,7 +46,14 @@
 
         <!-- Name -->
         <ng-container matColumnDef="Name">
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            <td mat-cell *matCellDef="let element; let i=index" (click)="editRow(i)">
+                <span *ngIf="i!=editingRow">{{element.name}}</span>
+                <span *ngIf="i==editingRow">
+                    <mat-form-field style="flex: 1 1 auto;">
+                        <input type="text" matInput [(ngModel)]="element.name" (blur)="stopEditing()">
+                    </mat-form-field>
+                </span>
+            </td>
         </ng-container>
 
         <!-- URL -->
@@ -66,3 +74,4 @@
         </table>
     </div>
 </mat-card>
+</div>

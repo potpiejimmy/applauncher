@@ -6,6 +6,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatTable } from '@angular/material/table';
 import { Subject, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { v4 as uuid } from 'uuid';
 
 @Component({
     selector: "add-app",
@@ -21,6 +22,8 @@ export class AddAppComponent {
     sensitive: boolean;
     filterChange: Subject<any>;
     filteredSuggestions: Observable<any>;
+
+    editingRow: number = -1;
 
     suggestions = [{
             name: "A Better Routeplanner",
@@ -105,7 +108,8 @@ export class AddAppComponent {
         setTimeout(() => this.inpname && this.inpname.nativeElement.focus(), 500);
     }
 
-    cancel() {
+    save() {
+        this.app.save();
         this.app.editing = false;
     }
 
@@ -117,6 +121,7 @@ export class AddAppComponent {
             let appInfo;
             if (this.sensitive) {
                 appInfo = {
+                    id: uuid(),
                     url: url,
                     name: url,
                     icon: '/assets/lock.png'
@@ -131,12 +136,24 @@ export class AddAppComponent {
     }
 
     async delete(row: number) {
+        this.stopEditing();
         this.app.removeApp(row);
     }
 
     dropTable(event: CdkDragDrop<any>) {
+        this.stopEditing();
         const prevIndex = this.app.apps.findIndex(d => d.url === event.item.data.url);
         moveItemInArray(this.app.apps, prevIndex, event.currentIndex);
         this.table.renderRows();
+    }
+
+    editRow(row: number): void {
+        this.editingRow = row;
+        console.log("Editing: " + row);
+    }
+
+    stopEditing(): void {
+        console.log("DONE");
+        this.editingRow = -1;
     }
 }

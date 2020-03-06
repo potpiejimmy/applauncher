@@ -19,10 +19,12 @@
     </button>
   </mat-toolbar>
 
-  <div fxLayout="column" class="screenCenter">
-    <div *ngIf="!app.editing" fxLayout="row wrap" fxLayoutAlign="center" style="margin: .5em;">
+  <add-app></add-app>
+
+  <div *ngIf="!app.editing" fxLayout="column" class="screenCenter">
+    <div fxLayout="row wrap" fxLayoutAlign="center" style="margin: .5em;">
       <pwa-launcher *ngFor="let app of app.apps" [app]="app"></pwa-launcher>
     </div>
-    <add-app fxLayoutAlign="center" style="width: 75%;"></add-app>
   </div>
+
 </div>
