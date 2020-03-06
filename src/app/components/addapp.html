@@ -2,7 +2,7 @@
 <mat-card *ngIf="app.editing" style="width: 75%; margin-top: 1em;" [ngClass]="app.modeClass">
     Add your favorite web sites:
 
-    <form style="margin-bottom: 1em;">
+    <form style="margin-bottom: 1em;" (ngSubmit)="save()">
         <div fxLayout="column" fxLayoutGap="1em">
             <div fxLayout="column">
                 <mat-form-field style="flex: 1 1 auto;">
@@ -17,9 +17,9 @@
                 <mat-checkbox name="sensitive" [(ngModel)]="sensitive">Sensitive URL (do not resolve icon and name)</mat-checkbox>
             </div>
             <div fxLayout="row" fxLayoutGap="1em">
-                <button mat-raised-button color="primary" (click)="add()" [disabled]="!url || url.length < 9">Add</button>
+                <button type="submit" mat-raised-button color="primary" (click)="add()" [disabled]="!url || url.length < 9">Add</button>
                 <div style="flex: 1 1 auto;"></div>
-                <button mat-raised-button (click)="save()">Save</button>
+                <button type="button" mat-raised-button (click)="save()">Save</button>
             </div>
         </div>
     </form>
