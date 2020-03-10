@@ -1,7 +1,7 @@
 <div id="mainBodyDiv" [ngClass]="app.modeClass">
 
   <!-- Toolbar -->
-  <mat-toolbar id="titlebar" [ngClass]="app.modeClass">
+  <mat-toolbar id="titlebar" [ngClass]="app.modeClass" flexLayoutGap="3em">
     <!--img
       width="40"
       alt="Angular Logo"
@@ -11,7 +11,10 @@
         <mat-icon>edit</mat-icon>
     </button>
     <div style="flex: 1 1 auto;">App Launcher</div>
-    <button mat-icon-button (click)="app.toggleMode()">
+    <button mat-icon-button (click)="info()" style="margin-right: 1em;">
+        <mat-icon>info</mat-icon>
+    </button>
+    <button mat-icon-button (click)="app.toggleMode()" style="margin-right: .5em;">
         <mat-icon>{{modeToggleIcon}}</mat-icon>
     </button>
     <button mat-icon-button (click)="fullscreen()">

@@ -24,4 +24,8 @@ export class AppComponent implements OnInit {
     get modeToggleIcon(): string {
         return this.app.mode == 'Light' ? 'nights_stay' : 'wb_sunny';
     }
+
+    info() {
+        window.location.href='https://twitter.com/potpiejimmy';
+    }
 }
