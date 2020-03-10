@@ -7,6 +7,8 @@ import { MatTable } from '@angular/material/table';
 import { Subject, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
+import { MatDialog } from '@angular/material/dialog';
+import { EditDialogComponent } from './editdialog';
 
 @Component({
     selector: "add-app",
@@ -79,7 +81,8 @@ export class AddAppComponent {
     constructor(
         public app: AppService,
         private appsApi: AppsApi,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
+        public dialog: MatDialog
     ) {
         this.app.editingComponent = this;
         this.filterChange = new Subject();
@@ -130,6 +133,7 @@ export class AddAppComponent {
                 appInfo = await this.appsApi.getAppInfo(url);
             }
             this.app.addApp(appInfo);
+            this.table.renderRows();
         } catch (err) {
             this.snackBar.open("Error", err, { duration: 10000 });
         }
@@ -138,6 +142,7 @@ export class AddAppComponent {
     async delete(row: number) {
         this.stopEditing();
         this.app.removeApp(row);
+        this.table.renderRows();
     }
 
     dropTable(event: CdkDragDrop<any>) {
@@ -150,6 +155,20 @@ export class AddAppComponent {
     editRow(row: number): void {
         this.editingRow = row;
         console.log("Editing: " + row);
+        const dialogRef = this.dialog.open(EditDialogComponent, {
+            width: '67%',
+            position: {'top': '1em'},
+            disableClose: true,
+            data: JSON.parse(JSON.stringify(this.app.apps[row]))
+        });
+      
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.app.apps[row] = result;
+                this.table.renderRows();
+            }
+            this.stopEditing();
+        });
     }
 
     stopEditing(): void {

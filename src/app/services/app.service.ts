@@ -21,7 +21,6 @@ export class AppService {
     }
 
     save() {
-        this.apps = JSON.parse(JSON.stringify(this.apps)); // change detection Angular
         localStorage.setItem("apps", JSON.stringify(this.apps));
         localStorage.setItem("mode", this.mode);
     }

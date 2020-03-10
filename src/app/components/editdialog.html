@@ -1,0 +1,22 @@
+<form id="editform">
+    <h3 mat-dialog-title>Edit</h3>
+    <div mat-dialog-content>
+        <mat-form-field class="width50">
+            <mat-label>Label</mat-label>
+            <input name="name" matInput [(ngModel)]="data.name">
+        </mat-form-field>
+        <mat-form-field class="width100">
+            <mat-label>URL</mat-label>
+            <input name="url" matInput [(ngModel)]="data.url">
+        </mat-form-field>
+        <mat-form-field class="width100">
+            <mat-label>Icon</mat-label>
+            <input name="icon" matInput [(ngModel)]="data.icon">
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button type="submit" mat-button [mat-dialog-close]="data" cdkFocusInitial>OK</button>
+        <div style="flex: 1 1 auto"></div>
+        <button type="button" mat-button (click)="cancel()">Cancel</button>
+    </div>
+</form>

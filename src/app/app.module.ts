@@ -18,18 +18,21 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { PwaLauncherComponent } from './components/pwa-launcher';
 import { AppsApi } from './services/appsapi';
 import { AddAppComponent } from './components/addapp';
 import { AppService } from './services/app.service';
+import { EditDialogComponent } from './components/editdialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     PwaLauncherComponent,
-    AddAppComponent
+    AddAppComponent,
+    EditDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,8 @@ import { AppService } from './services/app.service';
     MatDividerModule,
     MatTableModule,
     MatCheckboxModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDialogModule
   ],
   providers: [
     AppService,
