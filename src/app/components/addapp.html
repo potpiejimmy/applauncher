@@ -19,7 +19,7 @@
             <div fxLayout="row" fxLayoutGap="1em">
                 <button type="submit" mat-raised-button color="primary" (click)="add()" [disabled]="!url || url.length < 9">Add</button>
                 <div style="flex: 1 1 auto;"></div>
-                <button type="button" mat-raised-button (click)="save()">Save</button>
+                <button type="button" mat-raised-button (click)="save()">Ok, I'm done</button>
             </div>
         </div>
     </form>
@@ -28,6 +28,7 @@
 
     <div style="margin-top: 2em;">
         <table #appTable style="width: 100%;" mat-table [dataSource]="app.apps" class="mat-elevation-z1"
+            [ngClass]="app.modeClass"
             cdkDropList
             [cdkDropListData]="app.apps"
             (cdkDropListDropped)="dropTable($event)">

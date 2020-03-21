@@ -28,6 +28,9 @@ div.screenCenter {
 .modeDark {
     background-color: #444;
     color: white;
+    .mat-cell {
+        color: white;
+    }
 }
 
 .modeLight {
