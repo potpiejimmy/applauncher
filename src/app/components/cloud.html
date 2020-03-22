@@ -1,0 +1,48 @@
+<form id="cloudform">
+    <div mat-dialog-content>
+        <mat-tab-group>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                <mat-icon>cloud_upload</mat-icon>
+                <span style="margin-left: 1em;">Backup to cloud</span>
+                </ng-template>
+                <div style="margin: 1em;">
+                    <p>
+                        Store your current settings in the cloud to be restored on another device:
+                    </p>
+                    <mat-form-field>
+                        <mat-label>Backup ID</mat-label>
+                        <input style="font-size: 2em;" name="shortid" matInput value=" " disabled="true">
+                    </mat-form-field>
+                    <br/>
+                    <button type="button" mat-raised-button color="primary">Save to cloud</button>
+                </div>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                <mat-icon>cloud_download</mat-icon>
+                <span style="margin-left: 1em;">Restore from cloud</span>
+                </ng-template>
+                <div style="margin: 1em;">
+                    <p>
+                        Restore settings using a backup ID:
+                    </p>
+                    <mat-form-field>
+                        <mat-label>Backup ID</mat-label>
+                        <input style="font-size: 2em;" name="shortid" matInput value="">
+                    </mat-form-field>
+                    <br/>
+                    <mat-checkbox name="deleteFromCloud">Delete my data from the cloud after restoring</mat-checkbox>
+                    <p>
+                        <button type="button" mat-raised-button color="primary">Restore</button>
+                    </p>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <!--div mat-dialog-actions>
+        <button type="submit" mat-button [mat-dialog-close]="data" cdkFocusInitial>OK</button>
+        <div style="flex: 1 1 auto"></div>
+        <button type="button" mat-button (click)="cancel()">Close</button>
+    </div-->
+</form>

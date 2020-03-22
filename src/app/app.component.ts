@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from './services/app.service';
+import { CloudComponent } from './components/cloud';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-root',
@@ -10,7 +12,8 @@ export class AppComponent implements OnInit {
     title = 'App Launcher';
 
     constructor(
-        public app: AppService
+        public app: AppService,
+        public dialog: MatDialog
     ) {
     }
 
@@ -27,5 +30,18 @@ export class AppComponent implements OnInit {
 
     info() {
         window.location.href='https://twitter.com/potpiejimmy';
+    }
+
+    cloud() {
+        const dialogRef = this.dialog.open(CloudComponent, {
+            width: '67%',
+            position: {'top': '1em'},
+            data: {}
+        });
+      
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+            }
+        });
     }
 }

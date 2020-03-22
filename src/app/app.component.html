@@ -10,9 +10,9 @@
     <button [disabled]="app.editing" mat-icon-button (click)="app.startEditing()">
         <mat-icon>edit</mat-icon>
     </button>
-    <!--button [disabled]="app.editing" mat-icon-button (click)="app.cloudExport()" style="margin-left: 1em;">
+    <button [disabled]="app.editing" mat-icon-button (click)="cloud()" style="margin-left: 1em;">
         <mat-icon>cloud</mat-icon>
-    </button-->
+    </button>
     <div style="flex: 1 1 auto;">App Launcher</div>
     <button mat-icon-button (click)="info()" style="margin-right: 1em;">
         <mat-icon>info</mat-icon>

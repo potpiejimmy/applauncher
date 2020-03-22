@@ -19,6 +19,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { AppComponent } from './app.component';
 import { PwaLauncherComponent } from './components/pwa-launcher';
@@ -26,13 +27,15 @@ import { AppsApi } from './services/appsapi';
 import { AddAppComponent } from './components/addapp';
 import { AppService } from './services/app.service';
 import { EditDialogComponent } from './components/editdialog';
+import { CloudComponent } from './components/cloud';
 
 @NgModule({
   declarations: [
     AppComponent,
     PwaLauncherComponent,
     AddAppComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    CloudComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import { EditDialogComponent } from './components/editdialog';
     MatTableModule,
     MatCheckboxModule,
     MatAutocompleteModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTabsModule
   ],
   providers: [
     AppService,
