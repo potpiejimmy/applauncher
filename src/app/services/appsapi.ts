@@ -10,4 +10,15 @@ export class AppsApi extends HttpBaseService {
             url: url
         });
     }
+
+    backupApps(id: string, data: any): Promise<any> {
+        return this.post(environment.apiUrl+"backup", {
+            id: id,
+            data: data
+        });
+    }
+
+    restoreApps(id: string, remove: boolean): Promise<any> {
+        return this.get(environment.apiUrl+"backup/"+encodeURIComponent(id)+(remove?"?delete=1":""));
+    }
 }

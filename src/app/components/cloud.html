@@ -10,7 +10,7 @@
                     <p>
                         Store your current settings in the cloud to be restored on another device:
                     </p>
-                    <mat-form-field>
+                    <mat-form-field style="width:240px;">
                         <mat-label>Your Backup ID</mat-label>
                         <input #yourBackupID style="font-size: 2em;" name="shortid" matInput [value]="backupId" readonly="true">
                     </mat-form-field>
@@ -18,7 +18,8 @@
                         <fa-icon [icon]="faCopy"></fa-icon>
                     </button>
                     <br/>
-                    <button type="button" mat-raised-button color="primary" disabled="true">Save to cloud</button>
+                    <button *ngIf="!backupDone" type="button" mat-raised-button color="primary" (click)="backup()">Save to cloud</button>
+                    <p *ngIf="backupDone">Backup was successful. Use the above backup ID to restore on any device.</p>
                 </div>
             </mat-tab>
             <mat-tab>
@@ -30,7 +31,7 @@
                     <p>
                         Restore settings using a backup ID:
                     </p>
-                    <mat-form-field>
+                    <mat-form-field style="width:240px;">
                         <mat-label>Enter Backup ID</mat-label>
                         <input style="font-size: 2em;" name="shortid" matInput [(ngModel)]="backupId">
                     </mat-form-field>
@@ -38,9 +39,9 @@
                         <fa-icon [icon]="faPaste"></fa-icon>
                     </button>
                     <br/>
-                    <mat-checkbox name="deleteFromCloud">Delete my data from the cloud after restoring</mat-checkbox>
+                    <mat-checkbox name="deleteFromCloud" [(ngModel)]="backupDelete">Delete my data from the cloud after restoring</mat-checkbox>
                     <p>
-                        <button type="button" mat-raised-button color="primary" [disabled]="!backupId">Restore</button>
+                        <button type="button" mat-raised-button color="primary" [disabled]="!backupId" (click)="restore()">Restore</button>
                     </p>
                 </div>
             </mat-tab>

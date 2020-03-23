@@ -38,6 +38,11 @@ export class AppService {
         this.save();
     }
 
+    setAllApps(apps: Array<any>): void {
+        this.apps = apps;
+        this.save();
+    }
+
     startEditing() {
         if (this.editingComponent) this.editingComponent.edit();
     }
