@@ -28,6 +28,7 @@ import { AddAppComponent } from './components/addapp';
 import { AppService } from './services/app.service';
 import { EditDialogComponent } from './components/editdialog';
 import { CloudComponent } from './components/cloud';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { CloudComponent } from './components/cloud';
     MatCheckboxModule,
     MatAutocompleteModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    FontAwesomeModule
   ],
   providers: [
     AppService,

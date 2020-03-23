@@ -11,11 +11,14 @@
                         Store your current settings in the cloud to be restored on another device:
                     </p>
                     <mat-form-field>
-                        <mat-label>Backup ID</mat-label>
-                        <input style="font-size: 2em;" name="shortid" matInput value=" " disabled="true">
+                        <mat-label>Your Backup ID</mat-label>
+                        <input #yourBackupID style="font-size: 2em;" name="shortid" matInput [value]="backupId" readonly="true">
                     </mat-form-field>
+                    <button style="font-size: 1.5em;" mat-icon-button disabled="false" (click)="copyBackupId(yourBackupID)">
+                        <fa-icon [icon]="faCopy"></fa-icon>
+                    </button>
                     <br/>
-                    <button type="button" mat-raised-button color="primary">Save to cloud</button>
+                    <button type="button" mat-raised-button color="primary" disabled="true">Save to cloud</button>
                 </div>
             </mat-tab>
             <mat-tab>
@@ -28,13 +31,16 @@
                         Restore settings using a backup ID:
                     </p>
                     <mat-form-field>
-                        <mat-label>Backup ID</mat-label>
-                        <input style="font-size: 2em;" name="shortid" matInput value="">
+                        <mat-label>Enter Backup ID</mat-label>
+                        <input style="font-size: 2em;" name="shortid" matInput [(ngModel)]="backupId">
                     </mat-form-field>
+                    <button style="font-size: 1.5em;" mat-icon-button disabled="false" (click)="pasteBackupId()">
+                        <fa-icon [icon]="faPaste"></fa-icon>
+                    </button>
                     <br/>
                     <mat-checkbox name="deleteFromCloud">Delete my data from the cloud after restoring</mat-checkbox>
                     <p>
-                        <button type="button" mat-raised-button color="primary">Restore</button>
+                        <button type="button" mat-raised-button color="primary" [disabled]="!backupId">Restore</button>
                     </p>
                 </div>
             </mat-tab>
