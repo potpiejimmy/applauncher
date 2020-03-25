@@ -1,12 +1,12 @@
-<form id="cloudform">
-    <div mat-dialog-content>
-        <mat-tab-group>
-            <mat-tab>
-                <ng-template mat-tab-label>
-                <mat-icon>cloud_upload</mat-icon>
-                <span style="margin-left: 1em;">Backup to cloud</span>
-                </ng-template>
-                <div style="margin: 1em;">
+<div mat-dialog-content>
+    <mat-tab-group>
+        <mat-tab>
+            <ng-template mat-tab-label>
+            <mat-icon>cloud_upload</mat-icon>
+            <span style="margin-left: 1em;">Backup to cloud</span>
+            </ng-template>
+            <div style="margin: 1em;">
+                <form id="cloudbackupform">
                     <p>
                         Store your current settings in the cloud to be restored on another device:
                     </p>
@@ -18,16 +18,18 @@
                         <fa-icon [icon]="faCopy"></fa-icon>
                     </button>
                     <br/>
-                    <button *ngIf="!backupDone" type="button" mat-raised-button color="primary" (click)="backup()">Save to cloud</button>
+                    <button *ngIf="!backupDone" type="button" mat-raised-button color="primary" (click)="backup()" [disabled]="processing">Save to cloud</button>
                     <p *ngIf="backupDone">Backup was successful. Use the above backup ID to restore on any device.</p>
-                </div>
-            </mat-tab>
-            <mat-tab>
-                <ng-template mat-tab-label>
-                <mat-icon>cloud_download</mat-icon>
-                <span style="margin-left: 1em;">Restore from cloud</span>
-                </ng-template>
-                <div style="margin: 1em;">
+                </form>
+            </div>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+            <mat-icon>cloud_download</mat-icon>
+            <span style="margin-left: 1em;">Restore from cloud</span>
+            </ng-template>
+            <div style="margin: 1em;">
+                <form id="cloudrestoreform">
                     <p>
                         Restore settings using a backup ID:
                     </p>
@@ -35,21 +37,21 @@
                         <mat-label>Enter Backup ID</mat-label>
                         <input style="font-size: 2em;" name="shortid" matInput [(ngModel)]="backupId">
                     </mat-form-field>
-                    <button style="font-size: 1.5em;" mat-icon-button disabled="false" (click)="pasteBackupId()">
+                    <button type="button" style="font-size: 1.5em;" mat-icon-button disabled="false" (click)="pasteBackupId()">
                         <fa-icon [icon]="faPaste"></fa-icon>
                     </button>
                     <br/>
                     <mat-checkbox name="deleteFromCloud" [(ngModel)]="backupDelete">Delete my data from the cloud after restoring</mat-checkbox>
                     <p>
-                        <button type="button" mat-raised-button color="primary" [disabled]="!backupId" (click)="restore()">Restore</button>
+                        <button type="submit" mat-raised-button color="primary" [disabled]="!backupId || processing" (click)="restore()">Restore</button>
                     </p>
-                </div>
-            </mat-tab>
-        </mat-tab-group>
-    </div>
-    <!--div mat-dialog-actions>
-        <button type="submit" mat-button [mat-dialog-close]="data" cdkFocusInitial>OK</button>
-        <div style="flex: 1 1 auto"></div>
-        <button type="button" mat-button (click)="cancel()">Close</button>
-    </div-->
-</form>
+                </form>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+<!--div mat-dialog-actions>
+    <button type="submit" mat-button [mat-dialog-close]="data" cdkFocusInitial>OK</button>
+    <div style="flex: 1 1 auto"></div>
+    <button type="button" mat-button (click)="cancel()">Close</button>
+</div-->

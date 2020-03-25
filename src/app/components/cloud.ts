@@ -17,6 +17,7 @@ export class CloudComponent {
     backupId: string = '';
     backupDelete: boolean = false;
     backupDone: boolean = false;
+    processing: boolean = false;
 
     constructor(
         public dialogRef: MatDialogRef<CloudComponent>,
@@ -43,26 +44,38 @@ export class CloudComponent {
     }
 
     async backup() {
-        this.backupId = (await this.appsApi.backupApps(this.backupId, {
-            v: 1, /* version */
-            apps: this.app.apps
-        })).id;
-        this.backupDone = true;
-        localStorage.setItem("backupId", this.backupId);
+        this.processing = true;
+        try {
+            this.backupId = (await this.appsApi.backupApps(this.backupId, {
+                v: 1, /* version */
+                apps: this.app.apps
+            })).id;
+            this.backupDone = true;
+            localStorage.setItem("backupId", this.backupId);
+        } finally {
+            this.processing = false;
+        }
     }
 
     async restore() {
-        let data = await this.appsApi.restoreApps(this.backupId, this.backupDelete);
-        if (data) {
-            this.app.setAllApps(data.apps);
-            if (this.backupDelete) {
-                this.backupId = null;
-                localStorage.removeItem("backupId");
+        this.processing = true;
+        try {
+            let data = await this.appsApi.restoreApps(this.backupId, this.backupDelete);
+            if (data) {
+                this.app.setAllApps(data.apps);
+                if (this.backupDelete) {
+                    this.backupId = null;
+                    localStorage.removeItem("backupId");
+                } else {
+                    localStorage.setItem("backupId", this.backupId);
+                }
+                this.cancel();
+                this.snackBar.open("OK", "Successfully restored from cloud.", { duration: 3000 });
+            } else {
+                this.snackBar.open("Error", "Sorry, backup with ID " + this.backupId + " not found.", { duration: 5000 });
             }
-            this.cancel();
-            this.snackBar.open("OK", "Successfully restored from cloud.", { duration: 3000 });
-        } else {
-            this.snackBar.open("Error", "Sorry, backup with ID " + this.backupId + " not found.", { duration: 5000 });
+        } finally {
+            this.processing = false;
         }
     }
 }
