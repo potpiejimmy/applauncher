@@ -29,6 +29,8 @@ import { AppService } from './services/app.service';
 import { EditDialogComponent } from './components/editdialog';
 import { CloudComponent } from './components/cloud';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TooltipComponent } from './components/tooltip/tooltip';
+import { TooltipDirective } from './components/tooltip/tooltip.directive';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     PwaLauncherComponent,
     AddAppComponent,
     EditDialogComponent,
-    CloudComponent
+    CloudComponent,
+    TooltipComponent,
+    TooltipDirective
   ],
   imports: [
     BrowserModule,
@@ -65,6 +69,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppService,
     AppsApi
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ TooltipComponent ]
 })
 export class AppModule { }

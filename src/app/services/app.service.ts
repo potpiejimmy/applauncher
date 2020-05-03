@@ -11,9 +11,9 @@ export class AppService {
 
     constructor() {
         this.load();
-        if (!this.apps || !this.apps.length) {
-            setTimeout(()=>this.startEditing(), 1000);
-        }
+        // if (!this.apps || !this.apps.length) {
+        //     setTimeout(()=>this.startEditing(), 1000);
+        // }
     }
 
     load() {
