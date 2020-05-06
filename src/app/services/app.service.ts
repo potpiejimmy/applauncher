@@ -4,9 +4,7 @@ import { AddAppComponent } from '../components/addapp';
 @Injectable()
 export class AppService {
 
-    editing: boolean = false;
     apps: Array<any> = [];
-    editingComponent: AddAppComponent;
     mode: string = 'Light';
 
     constructor() {
@@ -41,10 +39,6 @@ export class AppService {
     setAllApps(apps: Array<any>): void {
         this.apps = apps;
         this.save();
-    }
-
-    startEditing() {
-        if (this.editingComponent) this.editingComponent.edit();
     }
 
     get modeClass(): string {

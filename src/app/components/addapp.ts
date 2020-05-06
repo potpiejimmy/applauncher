@@ -1,14 +1,11 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, ViewChild, Inject } from "@angular/core";
 import { AppService } from '../services/app.service';
 import { AppsApi } from '../services/appsapi';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { MatTable } from '@angular/material/table';
 import { Subject, Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
-import { MatDialog } from '@angular/material/dialog';
-import { EditDialogComponent } from './editdialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
     selector: "add-app",
@@ -17,20 +14,18 @@ import { EditDialogComponent } from './editdialog';
 export class AddAppComponent {
     
     @ViewChild('name') inpname;
-    @ViewChild('appTable') table: MatTable<any>;
-    displayedColumns: string[] = ['Reorder', 'Icon', 'Name', 'URL', 'Actions'];
 
     _url: string = "https://";
     sensitive: boolean;
     filterChange: Subject<any>;
     filteredSuggestions: Observable<any>;
 
-    editingRow: number = -1;
+    processing: boolean = false;
 
     suggestions = [{
             name: "A Better Routeplanner",
             icon: "https://abetterrouteplanner.com/icon/abrp_icon.png",
-            url: "https://new.abetterrouteplanner.com"
+            url: "https://abetterrouteplanner.com"
         },{
             name: "Chargeprice",
             icon: "https://chargeprice.app/img/logos/android-chrome-192x192.png",
@@ -79,12 +74,12 @@ export class AddAppComponent {
     ];
 
     constructor(
+        public dialogRef: MatDialogRef<AddAppComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: any,
         public app: AppService,
         private appsApi: AppsApi,
-        private snackBar: MatSnackBar,
-        public dialog: MatDialog
+        private snackBar: MatSnackBar
     ) {
-        this.app.editingComponent = this;
         this.filterChange = new Subject();
         this.filteredSuggestions = this.filterChange.pipe(
             startWith(''),
@@ -106,17 +101,12 @@ export class AddAppComponent {
         this.filterChange.next(url.indexOf('://') > 0 ? url.substr(url.indexOf('://') + 3) : url);
     }
 
-    edit() {
-        this.app.editing = true;
-        setTimeout(() => this.inpname && this.inpname.nativeElement.focus(), 500);
-    }
-
-    save() {
-        this.app.save();
-        this.app.editing = false;
+    close(): void {
+        this.dialogRef.close();
     }
 
     async add() {
+        this.processing = true;
         try {
             let url = this.url;
             this.url = "https://";
@@ -133,46 +123,11 @@ export class AddAppComponent {
                 appInfo = await this.appsApi.getAppInfo(url);
             }
             this.app.addApp(appInfo);
-            this.table.renderRows();
+            this.close();
         } catch (err) {
             this.snackBar.open("Error", err, { duration: 10000 });
+        } finally {
+            this.processing = false;
         }
-    }
-
-    async delete(row: number) {
-        this.stopEditing();
-        this.app.removeApp(row);
-        this.table.renderRows();
-    }
-
-    dropTable(event: CdkDragDrop<any>) {
-        this.stopEditing();
-        const prevIndex = this.app.apps.findIndex(d => d.url === event.item.data.url);
-        moveItemInArray(this.app.apps, prevIndex, event.currentIndex);
-        this.table.renderRows();
-    }
-
-    editRow(row: number): void {
-        this.editingRow = row;
-        console.log("Editing: " + row);
-        const dialogRef = this.dialog.open(EditDialogComponent, {
-            width: '67%',
-            position: {'top': '1em'},
-            disableClose: true,
-            data: JSON.parse(JSON.stringify(this.app.apps[row]))
-        });
-      
-        dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                this.app.apps[row] = result;
-                this.table.renderRows();
-            }
-            this.stopEditing();
-        });
-    }
-
-    stopEditing(): void {
-        console.log("DONE");
-        this.editingRow = -1;
     }
 }

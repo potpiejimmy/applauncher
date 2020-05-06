@@ -1,0 +1,51 @@
+<div mat-dialog-content>
+    Drag & drop apps in the list below to change the order.
+
+    <div style="margin-top: 2em;">
+        <table #appTable style="width: 100%;" mat-table [dataSource]="app.apps" class="mat-elevation-z1"
+            [ngClass]="app.modeClass"
+            cdkDropList
+            [cdkDropListData]="app.apps"
+            (cdkDropListDropped)="dropTable($event)">
+
+        <!-- Reorder -->
+        <ng-container matColumnDef="Reorder">
+            <td mat-cell *matCellDef="let element">
+                <mat-icon cdkDragHandle>reorder</mat-icon>
+            </td>
+        </ng-container>
+
+        <!-- Icon -->
+        <ng-container matColumnDef="Icon">
+            <td mat-cell *matCellDef="let element"> <img width="32" height="32" [src]="element.icon" onerror="this.src='/assets/www.png'"/> </td>
+        </ng-container>
+
+        <!-- Name -->
+        <ng-container matColumnDef="Name">
+            <td mat-cell *matCellDef="let element; let i=index">
+                <button mat-icon-button (click)="editRow(i)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                {{element.name}}
+            </td>
+        </ng-container>
+
+        <!-- URL -->
+        <ng-container matColumnDef="URL">
+            <td fxHide.xs mat-cell *matCellDef="let element"> {{element.url}} </td>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="Actions">
+            <td mat-cell *matCellDef="let element; let i = index" style="text-align: right;">
+                <button mat-icon-button (click)="delete(i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag [cdkDragData]="row"></tr>
+        </table>
+    </div>
+
+</div>

@@ -6,6 +6,7 @@ import {
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { TooltipComponent } from './tooltip';
+import { AppService } from 'src/app/services/app.service';
 
 @Directive({ selector: '[appTooltip]' })
 export class TooltipDirective implements OnInit, AfterViewInit {
@@ -16,7 +17,8 @@ export class TooltipDirective implements OnInit, AfterViewInit {
   constructor(
     private overlayPositionBuilder: OverlayPositionBuilder,
     private elementRef: ElementRef,
-    private overlay: Overlay
+    private overlay: Overlay,
+    private app: AppService
   ) {}
 
   ngOnInit() {
@@ -35,7 +37,9 @@ export class TooltipDirective implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-      setTimeout(() => this.show(), 2000);
+      // show automatically if no apps configured yet
+      if (!this.app.apps || !this.app.apps.length)
+          setTimeout(() => this.show(), 500);
   }
 
   show() {

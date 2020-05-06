@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from './services/app.service';
 import { CloudComponent } from './components/cloud';
 import { MatDialog } from '@angular/material/dialog';
+import { AddAppComponent } from './components/addapp';
+import { ReorderComponent } from './components/reorder';
 
 @Component({
     selector: 'app-root',
@@ -33,7 +35,19 @@ export class AppComponent implements OnInit {
     }
 
     cloud() {
-        const dialogRef = this.dialog.open(CloudComponent, {
+        this.openDialog(CloudComponent);
+    }
+
+    add() {
+        this.openDialog(AddAppComponent);
+    }
+
+    reorder() {
+        this.openDialog(ReorderComponent);
+    }
+
+    openDialog(component) {
+        const dialogRef = this.dialog.open(component, {
             width: '67%',
             position: {'top': '1em'},
             data: {}

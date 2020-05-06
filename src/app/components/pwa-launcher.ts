@@ -20,4 +20,12 @@ export class PwaLauncherComponent implements OnInit {
 //      let res = this.http.get(this.url).toPromise();
 //      console.log(JSON.stringify(res));
     }
+
+    onClick() {
+        window.location.href = this.app.url;
+    }
+
+    onLongClick() {
+        alert("LONG CLICK");
+    }
 }

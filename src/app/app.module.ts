@@ -20,6 +20,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { AppComponent } from './app.component';
 import { PwaLauncherComponent } from './components/pwa-launcher';
@@ -31,6 +32,8 @@ import { CloudComponent } from './components/cloud';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TooltipComponent } from './components/tooltip/tooltip';
 import { TooltipDirective } from './components/tooltip/tooltip.directive';
+import { ReorderComponent } from './components/reorder';
+import { LongClickDirective } from './directives/longclick.directive';
 
 @NgModule({
   declarations: [
@@ -39,8 +42,10 @@ import { TooltipDirective } from './components/tooltip/tooltip.directive';
     AddAppComponent,
     EditDialogComponent,
     CloudComponent,
+    ReorderComponent,
     TooltipComponent,
-    TooltipDirective
+    TooltipDirective,
+    LongClickDirective
   ],
   imports: [
     BrowserModule,
@@ -63,6 +68,8 @@ import { TooltipDirective } from './components/tooltip/tooltip.directive';
     MatAutocompleteModule,
     MatDialogModule,
     MatTabsModule,
+    MatProgressBarModule,
+    // Other
     FontAwesomeModule
   ],
   providers: [
