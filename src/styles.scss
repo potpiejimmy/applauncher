@@ -29,16 +29,27 @@ div.screenCenter {
     color: white !important;
 }
 
-.modeDark {
-    background-color: #444;
+.modeDark, .modeDarkFocus {
     color: white;
     .mat-cell {
         color: white;
     }
 }
 
+.modeDark {
+    background-color: #444;
+}
+
+.modeDarkFocus {
+    background-color: #555;
+}
+
 .modeLight {
     background-color: white;
+}
+
+.modeLightFocus {
+    background-color: #f8f8f8;
 }
 
 #mainBodyDiv.modeDark {

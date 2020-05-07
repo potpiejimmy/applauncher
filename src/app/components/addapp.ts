@@ -1,4 +1,4 @@
-import { Component, ViewChild, Inject } from "@angular/core";
+import { Component, ViewChild, Inject, AfterViewInit } from "@angular/core";
 import { AppService } from '../services/app.service';
 import { AppsApi } from '../services/appsapi';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,7 +11,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
     selector: "add-app",
     templateUrl: "addapp.html"
 })
-export class AddAppComponent {
+export class AddAppComponent implements AfterViewInit {
     
     @ViewChild('name') inpname;
 
@@ -19,6 +19,8 @@ export class AddAppComponent {
     sensitive: boolean;
     filterChange: Subject<any>;
     filteredSuggestions: Observable<any>;
+
+    folderName: string;
 
     processing: boolean = false;
 
@@ -86,7 +88,11 @@ export class AddAppComponent {
             map(urlpart => urlpart ? this._filteredSuggestions(urlpart) : [])
           );
     }
-    
+
+    ngAfterViewInit() {
+        setTimeout(()=>this.inpname.nativeElement.focus(), 500);
+    }
+
     private _filteredSuggestions(value: string): any {
         const filterValue = value.toLowerCase();
         return this.suggestions.filter(app => app.url.toLowerCase().indexOf(filterValue) >= 0);
@@ -105,7 +111,7 @@ export class AddAppComponent {
         this.dialogRef.close();
     }
 
-    async add() {
+    async addApp() {
         this.processing = true;
         try {
             let url = this.url;
@@ -129,5 +135,16 @@ export class AddAppComponent {
         } finally {
             this.processing = false;
         }
+    }
+
+    async addFolder() {
+        this.app.addApp({
+            id: uuid(),
+            url: "folder://",
+            name: this.folderName,
+            icon: '/assets/appfolder.png',
+            apps: []
+        });
+        this.close();
     }
 }

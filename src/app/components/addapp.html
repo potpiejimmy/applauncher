@@ -1,27 +1,58 @@
 <div mat-dialog-content>
-    Add a web site:
-
-    <form style="margin-bottom: 1em;">
-        <div fxLayout="column" fxLayoutGap="1em">
-            <div fxLayout="column">
-                <mat-form-field style="flex: 1 1 auto;">
-                    <input #name name="url" type="text" matInput [(ngModel)]="url" [matAutocomplete]="auto">
-                    <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option *ngFor="let app of filteredSuggestions | async" [value]="app.url">
-                            <img style="vertical-align: middle; margin-right: 8px;" aria-hidden [src]="app.icon" height="25">
-                            <span>{{app.name}}</span>
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
-                <mat-checkbox name="sensitive" [(ngModel)]="sensitive">Private URL (do not resolve icon and name)</mat-checkbox>
+    <mat-tab-group>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>touch_app</mat-icon>
+                <span style="margin-left: 1em;">Add App</span>
+            </ng-template>
+            <div style="margin: 1em;">
+                <form style="margin-bottom: 1em;">
+                    <div fxLayout="column" fxLayoutGap="1em">
+                        <div fxLayout="column">
+                            <mat-form-field style="flex: 1 1 auto;">
+                                <mat-label>Enter URL:</mat-label>
+                                <input #name name="url" type="text" matInput [(ngModel)]="url" [matAutocomplete]="auto">
+                                <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let app of filteredSuggestions | async" [value]="app.url">
+                                        <img style="vertical-align: middle; margin-right: 8px;" aria-hidden [src]="app.icon" height="25">
+                                        <span>{{app.name}}</span>
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                            <mat-checkbox name="sensitive" [(ngModel)]="sensitive">Private URL (do not resolve icon and name)</mat-checkbox>
+                        </div>
+                        <div fxLayout="row" fxLayoutGap="1em">
+                            <button type="submit" mat-raised-button color="primary" (click)="addApp()" [disabled]="!url || url.length < 9">Add</button>
+                            <div style="flex: 1 1 auto;"></div>
+                        </div>
+                        <span>Hint: Long-press on an App icon in the main view to edit or delete it.</span>
+                        <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
+                    </div>
+                </form>
             </div>
-            <div fxLayout="row" fxLayoutGap="1em">
-                <button type="submit" mat-raised-button color="primary" (click)="add()" [disabled]="!url || url.length < 9">Add</button>
-                <div style="flex: 1 1 auto;"></div>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>folder</mat-icon>
+                <span style="margin-left: 1em;">Add Folder</span>
+            </ng-template>
+            <div style="margin: 1em;">
+                <form style="margin-bottom: 1em;">
+                    <div fxLayout="column" fxLayoutGap="1em">
+                        <div fxLayout="column">
+                            <mat-form-field style="flex: 1 1 auto;">
+                                <mat-label>Enter folder name:</mat-label>
+                                <input #foldername name="foldername" type="text" matInput [(ngModel)]="folderName">
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutGap="1em">
+                            <button type="submit" mat-raised-button color="primary" (click)="addFolder()" [disabled]="!folderName">Create</button>
+                            <div style="flex: 1 1 auto;"></div>
+                        </div>
+                        <span>Hint: Long-press on an App icon in the main view to assign it to a folder.</span>
+                    </div>
+                </form>
             </div>
-            <span>Hint: Long-press on an App icon in the main view to edit or delete it.</span>
-            <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
-        </div>
-    </form>
-
+        </mat-tab>
+    </mat-tab-group>
 </div>

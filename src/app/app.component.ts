@@ -4,11 +4,28 @@ import { CloudComponent } from './components/cloud';
 import { MatDialog } from '@angular/material/dialog';
 import { AddAppComponent } from './components/addapp';
 import { ReorderComponent } from './components/reorder';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
+    animations: [
+        trigger('folderAnim', [
+            state('idle', style({
+                transform: 'translateX(0)'
+            })),
+            state('open', style({
+                transform: 'translateX(-100%)'
+            })),
+            state('close', style({
+                transform: 'translateX(100%)'
+            })),
+            transition('idle => open', animate('.25s ease-in-out')),
+            transition('idle => close', animate('.25s ease-in-out')),
+            transition('* => idle', animate('0s'))
+        ])
+    ]
 })
 export class AppComponent implements OnInit {
     title = 'App Launcher';

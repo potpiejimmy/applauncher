@@ -16,7 +16,7 @@
     <button mat-icon-button (click)="cloud()" style="margin-left: 1em;">
         <mat-icon>cloud</mat-icon>
     </button>
-    <div style="flex: 1 1 auto;">App Launcher</div>
+    <div style="flex: 1 1 auto;">{{app.currentFolder && app.currentFolder.name}}</div>
     <button mat-icon-button (click)="info()" style="margin-right: 1em;">
         <mat-icon>info</mat-icon>
     </button>
@@ -28,9 +28,15 @@
     </button>
   </mat-toolbar>
 
-  <div fxLayout="column" class="screenCenter">
+  <div *ngIf="app.currentFolder" style="z-index: 99; height: 90%; width: 40px; display: flex; align-items: center; position: fixed;">
+    <button mat-icon-button (click)="app.closeFolder()">
+        <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+  </div>
+
+  <div fxLayout="column" class="screenCenter" [@folderAnim]="app.folderAnimationState" (@folderAnim.done)="app.folderAnimationDone($event)">
     <div fxLayout="row wrap" fxLayoutAlign="center" style="margin: .5em;">
-      <pwa-launcher *ngFor="let app of app.apps" [app]="app"></pwa-launcher>
+      <pwa-launcher *ngFor="let app of app.currentApps" [app]="app"></pwa-launcher>
     </div>
   </div>
 

@@ -5,7 +5,7 @@
             <mat-label>Label</mat-label>
             <input name="name" matInput [(ngModel)]="data.name">
         </mat-form-field>
-        <mat-form-field class="width100">
+        <mat-form-field class="width100" *ngIf="data.url!='folder://'">
             <mat-label>URL</mat-label>
             <input name="url" matInput [(ngModel)]="data.url">
         </mat-form-field>

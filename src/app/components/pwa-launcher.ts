@@ -13,17 +13,36 @@ export class PwaLauncherComponent {
     @Input()
     app: any;
 
+    touching: boolean = false;
+
     constructor(
         public application: AppService,
         public dialog: MatDialog
     ) { }
 
+    touchStart() {
+        this.touching = true;
+    }
+
+    touchEnd() {
+        this.touching = false;
+    }
+
     onClick() {
-        window.location.href = this.app.url;
+        if (this.app.url == 'folder://') {
+            this.application.openFolder(this.app);
+        } else {
+            window.location.href = this.app.url;
+        }
     }
 
     onLongClick() {
+        this.touchEnd();
         this.edit();
+    }
+
+    get modeClass() {
+        return this.application.modeClass + (this.touching ? 'Focus' : '');
     }
 
     edit(): void {

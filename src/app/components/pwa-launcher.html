@@ -1,4 +1,8 @@
-<mat-card long-click (onClick)="onClick()" (onLongClick)="onLongClick()" [ngClass]="application.modeClass" style="width: 160px; text-align: center; margin: .5em;">
+<mat-card long-click 
+    (onClick)="onClick()" (onLongClick)="onLongClick()"
+    (mousedown)="touchStart()" (touchstart)="touchStart()"
+    (mouseup)="touchEnd()" (touchend)="touchEnd()" (drag)="touchEnd()"
+    [ngClass]="modeClass" style="width: 160px; text-align: center; margin: .5em;">
     <img width="48" height="48" [src]="app.icon" onerror="this.src='/assets/www.png'"/>
     <div style="margin-top: .75em; white-space:nowrap; overflow: hidden;">{{app.name}}</div>
 </mat-card>
