@@ -11,8 +11,4 @@ export class EditDialogComponent {
         public dialogRef: MatDialogRef<EditDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any) {
     }
-    
-    cancel(): void {
-        this.dialogRef.close();
-    }
 }

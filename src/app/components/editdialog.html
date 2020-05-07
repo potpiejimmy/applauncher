@@ -17,6 +17,7 @@
     <div mat-dialog-actions>
         <button type="submit" mat-button [mat-dialog-close]="data" cdkFocusInitial>OK</button>
         <div style="flex: 1 1 auto"></div>
-        <button type="button" mat-button (click)="cancel()">Cancel</button>
+        <button type="button" mat-button [mat-dialog-close]="'delete'">Delete</button>
+        <button type="button" mat-button [mat-dialog-close]="null">Cancel</button>
     </div>
 </form>

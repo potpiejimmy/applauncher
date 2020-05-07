@@ -19,7 +19,7 @@
                 <button type="submit" mat-raised-button color="primary" (click)="add()" [disabled]="!url || url.length < 9">Add</button>
                 <div style="flex: 1 1 auto;"></div>
             </div>
-            <span>Hint: Long-press on an App icon in the main view to edit its properties or to assign to folders.</span>
+            <span>Hint: Long-press on an App icon in the main view to edit or delete it.</span>
             <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
         </div>
     </form>

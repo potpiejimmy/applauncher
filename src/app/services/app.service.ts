@@ -31,8 +31,12 @@ export class AppService {
         this.save();
     }
 
-    removeApp(i: number) {
-        this.apps.splice(i,1);
+    removeApp(app: any) {
+        let found = -1;
+        for (let i=0; i<this.apps.length; i++) {
+            if (this.apps[i].id == app.id) found = i;
+        }
+        if (found >= 0) this.apps.splice(found,1);
         this.save();
     }
 

@@ -17,9 +17,8 @@ export class LongClickDirective {
     private startY: number = 0;
 
     @HostListener('mousedown', ['$event'])
+    @HostListener('touchstart', ['$event'])
     onMouseDown(event) {
-        if(event.which !== 1) return;
-
         this.startX = event.clientX;
         this.startY = event.clientY;
 
@@ -38,6 +37,7 @@ export class LongClickDirective {
     }
 
     @HostListener('mouseup')
+    @HostListener('touchend')
     onMouseUp() {
         if (this.pressing) this.endPress(this.onClick);
     }
