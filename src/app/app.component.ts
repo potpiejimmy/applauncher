@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
     }
 
     fullscreen() {
-        window.location.href='https://youtu.be/j8hGCA9rNKM';//'https://youtube.com/redirect?q=applauncher.site';
+        window.location.href='https://youtube.com/redirect?q=applauncher.site';//'https://youtu.be/j8hGCA9rNKM';
     }
 
     get modeToggleIcon(): string {
