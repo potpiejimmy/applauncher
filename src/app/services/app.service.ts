@@ -31,8 +31,7 @@ export class AppService {
     addApp(app: any) {
         if (this.isFolder(app)) {
             // for now, do not allow folders in folder
-            this.currentFolder = null;
-            this.currentApps = this.apps;
+            this.closeFolderImmediate();
         }
         this.currentApps.push(app);
         this.save();
@@ -55,6 +54,7 @@ export class AppService {
 
     setAllApps(apps: Array<any>): void {
         this.apps = apps;
+        this.closeFolderImmediate();
         this.save();
     }
 
@@ -80,9 +80,19 @@ export class AppService {
         this.folderAnimationState = 'open';
     }
 
+    openFolderImmediate(folder: any) {
+        this.currentFolder = folder;
+        this.currentApps = this.currentFolder.apps;
+    }
+
     closeFolder() {
         this.currentFolder = null;
         this.folderAnimationState = 'close';
+    }
+
+    closeFolderImmediate() {
+        this.currentFolder = null;
+        this.currentApps = this.apps;
     }
 
     folderAnimationDone(event) {

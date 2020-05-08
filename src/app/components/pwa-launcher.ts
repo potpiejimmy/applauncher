@@ -68,11 +68,9 @@ export class PwaLauncherComponent {
                     this.application.removeApp(this.app);
                     if (!result.currentFolderId) {
                         // move to root folder:
-                        this.application.currentFolder = null;
-                        this.application.currentApps = this.application.apps;
+                        this.application.closeFolderImmediate();
                     } else {
-                        this.application.currentFolder = this.application.apps.find(i => i.id == result.currentFolderId);
-                        this.application.currentApps = this.application.currentFolder.apps;
+                        this.application.openFolderImmediate(this.application.apps.find(i => i.id == result.currentFolderId));
                     }
                     this.application.addApp(this.app);
                 }
