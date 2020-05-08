@@ -29,26 +29,26 @@ export class AppService {
     }
 
     addApp(app: any) {
+        if (this.isFolder(app)) {
+            // for now, do not allow folders in folder
+            this.currentFolder = null;
+            this.currentApps = this.apps;
+        }
         this.currentApps.push(app);
         this.save();
     }
 
     removeApp(app: any) {
         let ix = this.findAppIndex(app);
-        if (ix >= 0) this.apps.splice(ix,1);
+        if (ix >= 0) this.currentApps.splice(ix,1);
         this.save();
     }
 
     findAppIndex(app: any): number {
-        let found = -1;
-        for (let i=0; i<this.apps.length; i++) {
-            if (this.apps[i].id == app.id) found = i;
-        }
+        let found = this.currentApps.findIndex(i => i.id == app.id);
         if (found < 0) {
             // fallback, search for same url (downward compatibility if no ID set)
-            for (let i=0; i<this.apps.length; i++) {
-                if (this.apps[i].url == app.url) found = i;
-            }
+            found = this.currentApps.findIndex(i => i.url == app.url);
         }
         return found;
     }
@@ -56,6 +56,14 @@ export class AppService {
     setAllApps(apps: Array<any>): void {
         this.apps = apps;
         this.save();
+    }
+
+    getFolders(): Array<any> {
+        return this.apps.filter(app => this.isFolder(app));
+    }
+
+    isFolder(app: any): boolean {
+        return app.url === 'folder://';
     }
 
     get modeClass(): string {

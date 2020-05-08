@@ -5,13 +5,21 @@
             <mat-label>Label</mat-label>
             <input name="name" matInput [(ngModel)]="data.name">
         </mat-form-field>
-        <mat-form-field class="width100" *ngIf="data.url!='folder://'">
+        <mat-form-field class="width100" *ngIf="!app.isFolder(data)">
             <mat-label>URL</mat-label>
             <input name="url" matInput [(ngModel)]="data.url">
         </mat-form-field>
         <mat-form-field class="width100">
             <mat-label>Icon</mat-label>
             <input name="icon" matInput [(ngModel)]="data.icon">
+        </mat-form-field>
+        <mat-form-field *ngIf="!app.isFolder(data)">
+            <mat-label>Folder</mat-label>
+            <mat-select [(value)]="data.currentFolderId">
+                <mat-option *ngFor="let folder of folderOptions" [value]="folder.id">
+                    {{folder.name}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
     </div>
     <div mat-dialog-actions>

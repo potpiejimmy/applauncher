@@ -20,8 +20,8 @@ export class ReorderComponent {
     ) {}
 
     dropTable(event: CdkDragDrop<any>) {
-        const prevIndex = this.app.apps.findIndex(d => d.url === event.item.data.url);
-        moveItemInArray(this.app.apps, prevIndex, event.currentIndex);
+        const prevIndex = this.app.findAppIndex(event.item.data);
+        moveItemInArray(this.app.currentApps, prevIndex, event.currentIndex);
         this.table.renderRows();
         this.app.save();
     }

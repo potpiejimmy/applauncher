@@ -2,10 +2,10 @@
     Drag & drop apps in the list below to change the order.
 
     <div style="margin: 2em 4em;">
-        <table #appTable style="width: 100%;" mat-table [dataSource]="app.apps" class="mat-elevation-z1"
+        <table #appTable style="width: 100%;" mat-table [dataSource]="app.currentApps" class="mat-elevation-z1"
             [ngClass]="app.modeClass"
             cdkDropList
-            [cdkDropListData]="app.apps"
+            [cdkDropListData]="app.currentApps"
             (cdkDropListDropped)="dropTable($event)">
 
         <!-- Reorder -->
@@ -29,7 +29,7 @@
 
         <!-- URL -->
         <ng-container matColumnDef="URL">
-            <td fxHide.xs mat-cell *matCellDef="let element"> {{element.url}} </td>
+            <td fxHide.xs mat-cell *matCellDef="let element"> {{!app.isFolder(element) ? element.url : ''}} </td>
         </ng-container>
 
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag [cdkDragData]="row"></tr>

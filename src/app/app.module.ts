@@ -21,6 +21,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppComponent } from './app.component';
 import { PwaLauncherComponent } from './components/pwa-launcher';
@@ -69,6 +70,7 @@ import { LongClickDirective } from './directives/longclick.directive';
     MatDialogModule,
     MatTabsModule,
     MatProgressBarModule,
+    MatSelectModule,
     // Other
     FontAwesomeModule
   ],

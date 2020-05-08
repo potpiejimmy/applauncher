@@ -29,7 +29,7 @@ export class PwaLauncherComponent {
     }
 
     onClick() {
-        if (this.app.url == 'folder://') {
+        if (this.application.isFolder(this.app)) {
             this.application.openFolder(this.app);
         } else {
             window.location.href = this.app.url;
@@ -46,11 +46,14 @@ export class PwaLauncherComponent {
     }
 
     edit(): void {
+        let appCopy = JSON.parse(JSON.stringify(this.app));
+        let oldFolderId = this.application.currentFolder && this.application.currentFolder.id || 0;
+        appCopy.currentFolderId = oldFolderId;
         const dialogRef = this.dialog.open(EditDialogComponent, {
             width: '67%',
             position: {'top': '1em'},
             disableClose: true,
-            data: JSON.parse(JSON.stringify(this.app))
+            data: appCopy
         });
       
         dialogRef.afterClosed().subscribe(result => {
@@ -60,6 +63,19 @@ export class PwaLauncherComponent {
                 this.app.name = result.name;
                 this.app.url = result.url;
                 this.app.icon = result.icon;
+                if (result.currentFolderId != oldFolderId) {
+                    // folder was changed - remove and re-add to new folder:
+                    this.application.removeApp(this.app);
+                    if (!result.currentFolderId) {
+                        // move to root folder:
+                        this.application.currentFolder = null;
+                        this.application.currentApps = this.application.apps;
+                    } else {
+                        this.application.currentFolder = this.application.apps.find(i => i.id == result.currentFolderId);
+                        this.application.currentApps = this.application.currentFolder.apps;
+                    }
+                    this.application.addApp(this.app);
+                }
                 this.application.save();
             }
         });
