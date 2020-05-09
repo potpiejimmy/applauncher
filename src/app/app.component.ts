@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
     }
 
     info() {
-        window.location.href='https://twitter.com/potpiejimmy';
+        window.location.href='https://www.youtube.com/channel/UC6h8aqlVqboag4CJjZ9qCCw/about';
     }
 
     cloud() {

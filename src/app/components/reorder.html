@@ -3,7 +3,6 @@
 
     <div style="margin: 2em 4em;">
         <table #appTable style="width: 100%;" mat-table [dataSource]="app.currentApps" class="mat-elevation-z1"
-            [ngClass]="app.modeClass"
             cdkDropList
             [cdkDropListData]="app.currentApps"
             (cdkDropListDropped)="dropTable($event)">

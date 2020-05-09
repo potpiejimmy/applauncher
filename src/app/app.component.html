@@ -10,7 +10,7 @@
     <button mat-icon-button (click)="add()" appTooltip="Tap here to add your favorite web sites">
         <mat-icon>add_box</mat-icon>
     </button>
-    <button mat-icon-button (click)="reorder()" style="margin-left: 1em;" [disabled]="!app.apps || app.apps.length < 2">
+    <button mat-icon-button (click)="reorder()" style="margin-left: 1em;" [disabled]="!app.currentApps || app.currentApps.length < 2">
       <mat-icon>reorder</mat-icon>
     </button>
     <button mat-icon-button (click)="cloud()" style="margin-left: 1em;">
