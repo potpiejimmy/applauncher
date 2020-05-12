@@ -3,6 +3,11 @@
     (mousedown)="touchStart()" (touchstart)="touchStart()"
     (mouseup)="touchEnd()" (touchend)="touchEnd()" (drag)="touchEnd()"
     [ngClass]="modeClass" style="width: 160px; text-align: center; margin: .5em;">
-    <img width="48" height="48" [src]="app.icon" onerror="this.src='/assets/www.png'"/>
+    <img *ngIf="!application.isFolder(app)" width="48" height="48" [src]="app.icon" onerror="this.src='/assets/www.png'"/>
+    <div *ngIf="application.isFolder(app)" fxLayout="column" class="screenCenter" style="height: 52px; max-height: 52px; overflow: hidden;">
+        <div fxLayout="row wrap" fxLayoutAlign="center">
+            <pwa-tiny-preview *ngFor="let pa of folderPreviewApps" [app]="pa"></pwa-tiny-preview>
+        </div>
+    </div>
     <div style="margin-top: .75em; white-space:nowrap; overflow: hidden;">{{app.name}}</div>
 </mat-card>

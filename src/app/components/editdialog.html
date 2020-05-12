@@ -9,7 +9,7 @@
             <mat-label>URL</mat-label>
             <input name="url" matInput [(ngModel)]="data.url">
         </mat-form-field>
-        <mat-form-field class="width100">
+        <mat-form-field class="width100" *ngIf="!app.isFolder(data)">
             <mat-label>Icon</mat-label>
             <input name="icon" matInput [(ngModel)]="data.icon">
         </mat-form-field>
@@ -21,6 +21,7 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
+        <div *ngIf="app.isFolder(data)">Note: Deleting a folder also deletes all apps in the folder.</div>
     </div>
     <div mat-dialog-actions>
         <button type="submit" mat-button [mat-dialog-close]="data" cdkFocusInitial>OK</button>

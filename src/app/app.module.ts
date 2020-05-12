@@ -35,6 +35,7 @@ import { TooltipComponent } from './components/tooltip/tooltip';
 import { TooltipDirective } from './components/tooltip/tooltip.directive';
 import { ReorderComponent } from './components/reorder';
 import { LongClickDirective } from './directives/longclick.directive';
+import { PwaTinyPreviewComponent } from './components/pwa-tinypreview';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { LongClickDirective } from './directives/longclick.directive';
     ReorderComponent,
     TooltipComponent,
     TooltipDirective,
-    LongClickDirective
+    LongClickDirective,
+    PwaTinyPreviewComponent
   ],
   imports: [
     BrowserModule,

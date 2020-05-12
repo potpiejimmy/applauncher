@@ -8,17 +8,23 @@ import { MatDialog } from '@angular/material/dialog';
     templateUrl: './pwa-launcher.html',
     styleUrls: ['./pwa-launcher.scss']
 })
-export class PwaLauncherComponent {
+export class PwaLauncherComponent implements OnInit {
 
     @Input()
     app: any;
 
     touching: boolean = false;
 
+    folderPreviewApps: Array<any>;
+
     constructor(
         public application: AppService,
         public dialog: MatDialog
     ) { }
+
+    ngOnInit() {
+        if (this.app.apps) this.folderPreviewApps = this.app.apps.slice(0,10);
+    }
 
     touchStart() {
         this.touching = true;
