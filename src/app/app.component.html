@@ -1,4 +1,4 @@
-<div id="mainBodyDiv" [ngClass]="app.modeClass">
+<div id="mainBodyDiv" fxLayout="column" [ngClass]="app.modeClass">
 
   <!-- Toolbar -->
   <mat-toolbar id="titlebar" [ngClass]="app.modeClass" flexLayoutGap="3em">
@@ -34,8 +34,8 @@
     </button>
   </div>
 
-  <div fxLayout="column" class="screenCenter" [@folderAnim]="app.folderAnimationState" (@folderAnim.done)="app.folderAnimationDone($event)">
-    <div fxLayout="row wrap" fxLayoutAlign="center" style="margin: .5em;">
+  <div style="flex: auto 1 1" fxLayout="column" fxLayoutAlign="center center" [@folderAnim]="app.folderAnimationState" (@folderAnim.done)="app.folderAnimationDone($event)">
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutAlign.xs="start" style="margin: .5em;">
       <pwa-launcher *ngFor="let app of app.currentApps" [app]="app"></pwa-launcher>
     </div>
   </div>

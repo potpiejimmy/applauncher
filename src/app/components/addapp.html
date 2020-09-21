@@ -19,7 +19,10 @@
                                     </mat-option>
                                 </mat-autocomplete>
                             </mat-form-field>
-                            <mat-checkbox name="sensitive" [(ngModel)]="sensitive">Private URL (do not resolve icon and name)</mat-checkbox>
+                            <mat-checkbox name="sensitive" [(ngModel)]="sensitive">
+                                <span fxShow fxHide.xs>Private URL (do not resolve icon and name)</span>
+                                <span fxHide fxShow.xs>Private URL</span>
+                            </mat-checkbox>
                         </div>
                         <div fxLayout="row" fxLayoutGap="1em">
                             <button type="submit" mat-raised-button color="primary" (click)="addApp()" [disabled]="!url || url.length < 9">Add</button>

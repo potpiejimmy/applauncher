@@ -4,7 +4,7 @@
     (mouseup)="touchEnd()" (touchend)="touchEnd()" (drag)="touchEnd()"
     [ngClass]="modeClass" style="width: 160px; text-align: center; margin: .5em;">
     <img *ngIf="!application.isFolder(app)" width="48" height="48" [src]="app.icon" onerror="this.src='/assets/www.png'"/>
-    <div *ngIf="application.isFolder(app)" fxLayout="column" class="screenCenter" style="height: 52px; max-height: 52px; overflow: hidden;">
+    <div *ngIf="application.isFolder(app)" fxLayout="column" fxLayoutAlign="center center" style="height: 52px; max-height: 52px; overflow: hidden;">
         <div fxLayout="row wrap" fxLayoutAlign="center">
             <pwa-tiny-preview *ngFor="let pa of folderPreviewApps" [app]="pa"></pwa-tiny-preview>
         </div>

@@ -65,7 +65,7 @@ export class AppComponent implements OnInit {
 
     openDialog(component) {
         const dialogRef = this.dialog.open(component, {
-            width: '67%',
+            maxWidth: '100vw !important',
             position: {'top': '1em'},
             data: {}
         });

@@ -56,7 +56,7 @@ export class PwaLauncherComponent implements OnInit {
         let oldFolderId = this.application.currentFolder && this.application.currentFolder.id || 0;
         appCopy.currentFolderId = oldFolderId;
         const dialogRef = this.dialog.open(EditDialogComponent, {
-            width: '67%',
+            maxWidth: '100vw !important',
             position: {'top': '1em'},
             disableClose: true,
             data: appCopy
