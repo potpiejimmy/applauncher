@@ -1,37 +1,70 @@
 <div mat-dialog-content>
-    <mat-tab-group>
+    <mat-tab-group (selectedTabChange)="tabChanged($event)">
         <mat-tab>
             <ng-template mat-tab-label>
                 <mat-icon>web_asset</mat-icon>
                 <span style="margin-left: 1em;">Add App</span>
             </ng-template>
-            <div style="margin: 1em;">
-                <form style="margin-bottom: 1em;">
-                    <div fxLayout="column" fxLayoutGap="1em">
-                        <div fxLayout="column">
-                            <mat-form-field style="flex: 1 1 auto;">
-                                <mat-label>Enter URL:</mat-label>
-                                <input #name name="url" type="text" matInput [(ngModel)]="url" [matAutocomplete]="auto">
-                                <mat-autocomplete #auto="matAutocomplete">
-                                    <mat-option *ngFor="let app of filteredSuggestions | async" [value]="app.url">
-                                        <img style="vertical-align: middle; margin-right: 8px;" aria-hidden [src]="app.icon" height="25">
-                                        <span>{{app.name}}</span>
-                                    </mat-option>
-                                </mat-autocomplete>
-                            </mat-form-field>
-                            <mat-checkbox name="sensitive" [(ngModel)]="sensitive">
-                                <span fxShow fxHide.xs>Private URL (do not resolve icon and name)</span>
-                                <span fxHide fxShow.xs>Private URL</span>
-                            </mat-checkbox>
+
+            <div style="margin:2px;" fxLayout="column" fxLayoutGap="1em">
+
+                <mat-accordion>
+                    <mat-expansion-panel hideToggle [expanded]="true" (opened)="expandedCommunity()">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Community
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Select a community app to add
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <mat-form-field style="width: 100%;">
+                            <input #inpfilter name="filter" autocomplete="off" placeholder="Quick Filter" type="text" matInput [(ngModel)]="filter">
+                            <mat-icon style="cursor: pointer;" (click)="this.filter=''" matSuffix>clear</mat-icon>
+                            <mat-hint>Filter by app name or URL</mat-hint>
+                        </mat-form-field>
+                        <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap=".4em" style="margin-top: 1em; overflow: scroll;">
+                            <pwa-community-app *ngFor="let asdf of communityAppsFiltered" [app]="asdf"></pwa-community-app>
                         </div>
-                        <div fxLayout="row" fxLayoutGap="1em">
-                            <button type="submit" mat-raised-button color="primary" (click)="addApp()" [disabled]="!url || url.length < 9">Add</button>
-                            <div style="flex: 1 1 auto;"></div>
-                        </div>
-                        <span>Hint: Long-press on an App icon in the main view to edit or delete it.</span>
-                        <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
-                    </div>
-                </form>
+                        <div *ngIf="!communityAppsFiltered.length">No apps found</div>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel hideToggle [expanded]="false" (opened)="expandedCustom()">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Custom
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Add your own custom app here
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <form style="margin-bottom: 1em;">
+                            <div fxLayout="column" fxLayoutGap="1em">
+                                <div fxLayout="column">
+                                    <mat-form-field style="flex: 1 1 auto;">
+                                        <mat-label>Enter URL:</mat-label>
+                                        <input #inpurl name="url" type="text" matInput [(ngModel)]="url">
+                                    </mat-form-field>
+                                    <mat-checkbox name="sensitive" [(ngModel)]="sensitive">
+                                        <span fxShow fxHide.xs>Private URL (do not resolve icon and name)</span>
+                                        <span fxHide fxShow.xs>Private URL</span>
+                                    </mat-checkbox>
+                                </div>
+                                <div fxLayout="row" fxLayoutGap="1em">
+                                    <button type="submit" mat-raised-button color="primary" (click)="addApp()" [disabled]="!url || url.length < 9">Add</button>
+                                    <div style="flex: 1 1 auto;"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+                <div>
+                    <span>Hint: Long-press on an App icon in the main view to edit or delete it.</span>
+                    <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
+                </div>
             </div>
         </mat-tab>
         <mat-tab>
@@ -45,7 +78,7 @@
                         <div fxLayout="column">
                             <mat-form-field style="flex: 1 1 auto;">
                                 <mat-label>Enter folder name:</mat-label>
-                                <input #foldername name="foldername" type="text" matInput [(ngModel)]="folderName">
+                                <input #inpfoldername name="foldername" type="text" matInput [(ngModel)]="folderName">
                             </mat-form-field>
                         </div>
                         <div fxLayout="row" fxLayoutGap="1em">

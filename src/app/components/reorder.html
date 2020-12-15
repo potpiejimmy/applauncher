@@ -21,14 +21,14 @@
 
         <!-- Name -->
         <ng-container matColumnDef="Name">
-            <td mat-cell *matCellDef="let element">
+            <td class="reorderTd" mat-cell *matCellDef="let element">
                 {{element.name}}
             </td>
         </ng-container>
 
         <!-- URL -->
         <ng-container matColumnDef="URL">
-            <td fxHide.xs mat-cell *matCellDef="let element"> {{!app.isFolder(element) ? element.url : '[Folder]'}} </td>
+            <td class="reorderTd" fxHide.xs mat-cell *matCellDef="let element"> {{!app.isFolder(element) ? element.url : '[Folder]'}} </td>
         </ng-container>
 
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag [cdkDragData]="row"></tr>

@@ -6,7 +6,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
     selector: "reorder-apps",
-    templateUrl: "reorder.html"
+    templateUrl: "reorder.html",
+    styleUrls: ["reorder.scss"]
 })
 export class ReorderComponent {
 

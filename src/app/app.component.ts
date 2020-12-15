@@ -52,19 +52,20 @@ export class AppComponent implements OnInit {
     }
 
     cloud() {
-        this.openDialog(CloudComponent);
+        this.openDialog(CloudComponent, '60%');
     }
 
     add() {
-        this.openDialog(AddAppComponent);
+        this.openDialog(AddAppComponent, '80%');
     }
 
     reorder() {
-        this.openDialog(ReorderComponent);
+        this.openDialog(ReorderComponent, '75%');
     }
 
-    openDialog(component) {
+    openDialog(component, width) {
         const dialogRef = this.dialog.open(component, {
+            width: width,
             maxWidth: '100vw !important',
             position: {'top': '1em'},
             data: {}

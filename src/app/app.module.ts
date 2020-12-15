@@ -22,6 +22,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { AppComponent } from './app.component';
 import { PwaLauncherComponent } from './components/pwa-launcher';
@@ -36,6 +37,7 @@ import { TooltipDirective } from './components/tooltip/tooltip.directive';
 import { ReorderComponent } from './components/reorder';
 import { LongClickDirective } from './directives/longclick.directive';
 import { PwaTinyPreviewComponent } from './components/pwa-tinypreview';
+import { PwaCommunityAppComponent } from './components/pwa-communityapp';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { PwaTinyPreviewComponent } from './components/pwa-tinypreview';
     TooltipComponent,
     TooltipDirective,
     LongClickDirective,
-    PwaTinyPreviewComponent
+    PwaTinyPreviewComponent,
+    PwaCommunityAppComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +76,7 @@ import { PwaTinyPreviewComponent } from './components/pwa-tinypreview';
     MatTabsModule,
     MatProgressBarModule,
     MatSelectModule,
+    MatExpansionModule,
     // Other
     FontAwesomeModule
   ],

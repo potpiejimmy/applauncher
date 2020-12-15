@@ -11,6 +11,10 @@ export class AppsApi extends HttpBaseService {
         });
     }
 
+    getCommunityApps(): Promise<any> {
+        return this.get(environment.apiUrl+"apps/community");
+    }
+
     backupApps(id: string, data: any): Promise<any> {
         return this.post(environment.apiUrl+"backup", {
             id: id,
