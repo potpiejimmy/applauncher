@@ -25,8 +25,6 @@ export class AddAppComponent implements OnInit, AfterViewInit {
 
     folderName: string;
 
-    selectedExpansion: string = 'community';
-
     communityApps: any = [];
     communityAppsFiltered = [];
 
@@ -80,27 +78,11 @@ export class AddAppComponent implements OnInit, AfterViewInit {
 
     tabChanged(event: MatTabChangeEvent): void {
         if (event.index == 0) {
-            this.expansionChanged();
-        } else if (event.index == 1) {
-            this.focus(this.inpfoldername);
-        }
-    }
-
-    expandedCommunity() {
-        this.selectedExpansion = 'community';
-        if (this.inpfilter) this.expansionChanged();
-    }
-
-    expandedCustom() {
-        this.selectedExpansion = 'custom';
-        this.expansionChanged();
-    }
-
-    expansionChanged(): void {
-        if (this.selectedExpansion === 'community') {
             this.focus(this.inpfilter);
-        } else if (this.selectedExpansion === 'custom') {
+        } else if (event.index == 1) {
             this.focus(this.inpurl);
+        } else if (event.index == 2) {
+            this.focus(this.inpfoldername);
         }
     }
 
