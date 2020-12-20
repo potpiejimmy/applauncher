@@ -22,6 +22,7 @@ export class AddAppComponent implements OnInit, AfterViewInit {
     _filter: string = '';
     _url: string = "https://";
     sensitive: boolean;
+    community: boolean;
 
     folderName: string;
 
@@ -87,7 +88,7 @@ export class AddAppComponent implements OnInit, AfterViewInit {
     }
 
     focus(element: ElementRef): void {
-        setTimeout(()=>element.nativeElement.focus(), 400);
+        setTimeout(()=>element.nativeElement.focus(), 500);
     }
 
     async addApp() {

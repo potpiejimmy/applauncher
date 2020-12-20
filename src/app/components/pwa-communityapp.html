@@ -1,5 +1,5 @@
-<mat-card
-    [ngClass]="application.modeClass" style="width: 150px; text-align: center; margin: .3em; padding: .5em;">
-    <img width="32" height="32" [src]="app.icon" onerror="this.src='/assets/www.png'"/>
-    <div style="margin-top: .5em; white-space:nowrap; overflow: hidden;font-size: .8em;">{{app.name}}</div>
-</mat-card>
+<button mat-raised-button
+    [ngClass]="application.modeClass" style="width: 150px; text-align: center; margin: .3em;">
+    <img width="32" height="32" [src]="app.icon" onerror="this.src='/assets/www.png'" style="margin-top: 1em;"/>
+    <div style="margin-top: .3em; white-space:nowrap; overflow: hidden;font-size: .85em;">{{app.name}}</div>
+</button>

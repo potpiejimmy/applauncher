@@ -9,12 +9,12 @@
             <div style="margin: 1em;">
                 <div fxLayout="column" fxLayoutGap="1em">
                     <mat-form-field style="width: 100%;">
-                        <input #inpfilter name="filter" autocomplete="off" placeholder="Quick Filter" type="text" matInput [(ngModel)]="filter">
+                        <input #inpfilter name="filter" autocomplete="off" placeholder="Quick filter" type="text" matInput [(ngModel)]="filter">
                         <mat-icon style="cursor: pointer;" (click)="this.filter=''" matSuffix>clear</mat-icon>
                         <mat-hint>Filter by app name or URL</mat-hint>
                     </mat-form-field>
-                    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap=".4em" style="margin-top: 1em; overflow: scroll;">
-                        <pwa-community-app *ngFor="let asdf of communityAppsFiltered" [app]="asdf"></pwa-community-app>
+                    <div fxLayout="row wrap" fxLayoutAlign="start" fxLayoutGap=".4em" style="margin-top: 1em;">
+                        <pwa-community-app *ngFor="let app of communityAppsFiltered" [app]="app"></pwa-community-app>
                     </div>
                     <div *ngIf="!communityAppsFiltered.length">No apps found</div>
                     <div>
@@ -37,10 +37,16 @@
                         <mat-label>Enter URL:</mat-label>
                         <input #inpurl name="url" type="text" matInput [(ngModel)]="url">
                     </mat-form-field>
-                    <mat-checkbox name="sensitive" [(ngModel)]="sensitive">
-                        <span fxShow fxHide.xs>Private URL (do not resolve icon and name)</span>
-                        <span fxHide fxShow.xs>Private URL</span>
-                    </mat-checkbox>
+                    <div fxLayout="column">
+                        <mat-checkbox name="sensitive" [(ngModel)]="sensitive" [disabled]="community">
+                            <span fxShow fxHide.xs>Private URL (do not resolve icon and name)</span>
+                            <span fxHide fxShow.xs>Private URL</span>
+                        </mat-checkbox>
+                        <mat-checkbox name="community" [(ngModel)]="community" [disabled]="sensitive">
+                            <span fxShow fxHide.xs>Suggest this App as a Community App</span>
+                            <span fxHide fxShow.xs>Suggest Community App</span>
+                        </mat-checkbox>
+                    </div>
                     <div fxLayout="row" fxLayoutGap="1em">
                         <button type="submit" mat-raised-button color="primary" (click)="addApp()" [disabled]="!url || url.length < 9">Add</button>
                         <div style="flex: 1 1 auto;"></div>
