@@ -90,8 +90,16 @@ export class AddAppComponent implements OnInit, AfterViewInit {
     focus(element: ElementRef): void {
         setTimeout(()=>element.nativeElement.focus(), 500);
     }
+    
+    async addCommunityApp(app: any) {
+        // simply copy community app:
+        let appInfo = JSON.parse(JSON.stringify(app));
+        appInfo.id = uuid();
+        this.app.addApp(appInfo);
+        this.close();
+    }
 
-    async addApp() {
+    async addCustomApp() {
         this.processing = true;
         try {
             let url = this.url;
@@ -106,7 +114,10 @@ export class AddAppComponent implements OnInit, AfterViewInit {
                     icon: '/assets/lock.png'
                 }
             } else {
-                appInfo = await this.appsApi.getAppInfo(url);
+                appInfo = await this.appsApi.getAppInfo({
+                    url: url,
+                    suggestCommunity: this.community
+                });
             }
             this.app.addApp(appInfo);
             this.close();
@@ -118,13 +129,15 @@ export class AddAppComponent implements OnInit, AfterViewInit {
     }
 
     async addFolder() {
-        this.app.addApp({
+        let folder = {
             id: uuid(),
             url: "folder://",
             name: this.folderName,
             icon: '/assets/appfolder.png',
             apps: []
-        });
+        };
+        this.app.addApp(folder);
+        this.app.openFolder(folder);
         this.close();
     }
 }

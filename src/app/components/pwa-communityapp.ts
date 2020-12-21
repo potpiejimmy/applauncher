@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { AppService } from "../services/app.service";
 
 @Component({
@@ -9,6 +9,9 @@ export class PwaCommunityAppComponent {
 
     @Input()
     app: any;
+
+    @Output()
+    buttonClick: EventEmitter<void> = new EventEmitter();
 
     constructor(
         public application: AppService

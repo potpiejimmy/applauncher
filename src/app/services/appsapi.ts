@@ -5,10 +5,8 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class AppsApi extends HttpBaseService {
 
-    getAppInfo(url: string): Promise<any> {
-        return this.post(environment.apiUrl+"apps", {
-            url: url
-        });
+    getAppInfo(data: any): Promise<any> {
+        return this.post(environment.apiUrl+"apps", data);
     }
 
     getCommunityApps(): Promise<any> {
