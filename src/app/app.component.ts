@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
     }
 
     add() {
-        this.openDialog(AddAppComponent, '80%');
+        this.openDialog(AddAppComponent, '70%');
     }
 
     reorder() {
