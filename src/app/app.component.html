@@ -16,16 +16,17 @@
     <button mat-icon-button (click)="cloud()" style="margin-left: 1em;">
         <mat-icon>cloud</mat-icon>
     </button>
+    <button fxHide.xs mat-icon-button (click)="app.toggleMode()" style="margin-left: 1em;">
+        <mat-icon>{{modeToggleIcon}}</mat-icon>
+    </button>
+    <button mat-icon-button (click)="info()" style="margin-left: 1em;">
+      <mat-icon>info</mat-icon>
+    </button>
     <div style="flex: 1 1 auto; font-size: 1.3em;">
       <span fxHide.xs>{{app.currentFolder && app.currentFolder.name}}</span>
     </div>
-    <button mat-icon-button (click)="info()" style="margin-right: 1em;">
-        <mat-icon>info</mat-icon>
-    </button>
-    <button fxHide.xs mat-icon-button (click)="app.toggleMode()" style="margin-right: .5em;">
-        <mat-icon>{{modeToggleIcon}}</mat-icon>
-    </button>
-    <button fxHide.xs mat-icon-button (click)="fullscreen()">
+    <button fxHide.xs mat-button (click)="fullscreen()">
+        FULL SCREEN
         <mat-icon>fullscreen</mat-icon>
     </button>
   </mat-toolbar>

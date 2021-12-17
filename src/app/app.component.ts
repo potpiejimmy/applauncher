@@ -44,7 +44,8 @@ export class AppComponent implements OnInit {
     }
 
     get modeToggleIcon(): string {
-        return this.app.mode == 'Light' ? 'nights_stay' : 'wb_sunny';
+        let icons = ['wb_sunny', 'nights_stay', 'brightness_auto'];
+        return icons[this.app.modes.indexOf(this.app.mode)];
     }
 
     info() {

@@ -7,7 +7,8 @@ export class AppService {
     apps: Array<any> = [];
     currentApps: Array<any>;
     currentFolder: any;
-    mode: string = 'Light';
+    modes = ['Light','Dark','Auto'];
+    mode: string = 'Auto';
     folderAnimationState: string = 'idle';
 
     constructor() {
@@ -67,11 +68,17 @@ export class AppService {
     }
 
     get modeClass(): string {
-        return 'mode' + this.mode;
+        if (this.mode == 'Auto') {
+            let dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            return 'mode' + (dark ? 'Dark' : 'Light');
+        } else {
+            return 'mode' + this.mode;
+        }
     }
 
     toggleMode(): void {
-        this.mode = this.mode == 'Light' ? 'Dark' : 'Light';
+        let ix = this.modes.indexOf(this.mode);
+        this.mode = this.modes[(ix + 1) % 3];
         this.save();
     }
 
