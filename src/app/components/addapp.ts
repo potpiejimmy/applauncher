@@ -45,7 +45,7 @@ export class AddAppComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.focus(this.inpfilter);
+        this.focus(this.inpfilter, 1000);
     }
 
     get filter() {
@@ -87,8 +87,8 @@ export class AddAppComponent implements OnInit, AfterViewInit {
         }
     }
 
-    focus(element: ElementRef): void {
-        setTimeout(()=>element.nativeElement.focus(), 500);
+    focus(element: ElementRef, delay: number = 500): void {
+        setTimeout(()=>element.nativeElement.focus(), delay);
     }
     
     async addCommunityApp(app: any) {
